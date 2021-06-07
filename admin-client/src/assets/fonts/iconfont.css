@@ -1,0 +1,71 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2236808 */
+  src: url('iconfont.woff2?t=1623027525622') format('woff2'),
+       url('iconfont.woff?t=1623027525622') format('woff'),
+       url('iconfont.ttf?t=1623027525622') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cangku1:before {
+  content: "\e668";
+}
+
+.icon-cangkuguanli:before {
+  content: "\e615";
+}
+
+.icon-cangku:before {
+  content: "\e625";
+}
+
+.icon-xiaoxi:before {
+  content: "\e64d";
+}
+
+.icon-xiaoxi1:before {
+  content: "\e601";
+}
+
+.icon-nice:before {
+  content: "\e639";
+}
+
+.icon-ordersearch:before {
+  content: "\e670";
+}
+
+.icon-Delete:before {
+  content: "\e848";
+}
+
+.icon-orders:before {
+  content: "\e66c";
+}
+
+.icon-tuichu:before {
+  content: "\e63d";
+}
+
+.icon-zhuxiaologout11:before {
+  content: "\e618";
+}
+
+.icon-phone:before {
+  content: "\e66f";
+}
+
+.icon-user:before {
+  content: "\e607";
+}
+
+.icon-password:before {
+  content: "\e606";
+}
+
