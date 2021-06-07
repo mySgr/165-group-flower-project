@@ -10,9 +10,6 @@ export default {
   name: "app",
   methods: {
     test() {
-      let obj = new FormData();
-      obj.append("phone", "110");
-      obj.append("password", "123123");
       this.$axios.get("/api/test", {
         params: { name: "admin" },
       })
