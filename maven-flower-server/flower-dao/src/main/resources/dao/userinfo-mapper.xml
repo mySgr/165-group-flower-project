@@ -49,11 +49,23 @@
         where phone = #{phone} and password = #{password}
 
     </select>
+
     <select id="getUserInfo" resultType="UserInfoEntity">
         select
         user_id,user_name,phone,avatar,birthdate,autograph,status,created
         from user_info
         where user_id = #{id}
     </select>
+
+    <select id="getUserByPhone" resultType="UserInfoEntity">
+        select phone from user_info where phone = #{phone}
+    </select>
+
+    <insert id="insertUserInfo" >
+        insert into user_info(user_id,user_name,phone,password,avatar,created,role_id,`status`)
+        values(#{userId},#{userName},#{phone},#{password},#{avatar},#{created},#{roleId},#{status} )
+    </insert>
+
+
 
 </mapper>

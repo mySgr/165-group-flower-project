@@ -24,13 +24,14 @@ public class UserLoginServlet extends MyHttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        String phone = req.getParameter("phone");
-//        String password = req.getParameter("password");
         final String s = req.getReader().readLine();
+        System.out.println(s);
         UserInfoEntity userParams = JsonUtil.string2Object(s, UserInfoEntity.class);
 
 
+
         UserInfoEntity userInfoEntity = new UserInfoServiceImpl().userLogin(userParams.getPhone(), userParams.getPassword());
+
         if (userInfoEntity != null) {
             resp.getWriter().println(JsonUtil.object2String(ResultVO.success(userInfoEntity, "登陆成功")));
         } else {

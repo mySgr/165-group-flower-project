@@ -17,10 +17,10 @@
             <el-menu-item index="/customer-service">联系我们</el-menu-item>
 
 
-            <el-submenu index="2" style="float: right">
+            <el-submenu index="2" style="float: right" v-if="user!=null||user!=undefined">
                 <template slot="title">
                     <el-avatar size="medium" :src="avatarSrc"></el-avatar>
-                    <span> 我的信息</span>
+                    <span>{{user.userName}}</span>
                 </template>
                 <el-menu-item index="/user">
                     <i class="el-icon-user"></i>
@@ -31,8 +31,12 @@
                     <span>订单管理</span>
 
                 </el-menu-item>
-                <el-menu-item index="2-3">选项3</el-menu-item>
+                <el-menu-item index="2-3">
+                    <i class="el-icon-user-solid"></i>
+                    <span>退出用户</span>
+                </el-menu-item>
             </el-submenu>
+            <el-menu-item v-else index="/login" style="float: right">login</el-menu-item>
             <el-menu-item index="/reply" style="float: right">消息中心</el-menu-item>
             <el-menu-item index="/cart" style="float: right">购物车</el-menu-item>
             <el-menu-item index="/member" style="float: right">店铺会员</el-menu-item>
@@ -56,24 +60,14 @@
         data() {
             return {
                 activeIndex: "/home",
-                userinfo: {},
+                user: JSON.parse(window.sessionStorage.getItem("user")),
                 avatarSrc: require('../assets/image/avatar.jpg'),
 
             };
         },
-        methods: {
-            getUser() {
-                this.$axios({
-                    url: "/api/user/login",
-                    method: "post",
-                    params: {phone: "110", password: "123123"},
-                }).then((result) => {
-                    console.log(result);
-                });
-            },
-        },
+        methods: {},
+
         created() {
-            this.getUser();
         },
     };
 </script>

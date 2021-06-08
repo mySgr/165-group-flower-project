@@ -23,8 +23,8 @@
             </dataSource>
         </environment>
     </environments>
-<mappers>
-    <mapper resource="dao/userinfo-mapper.xml"></mapper>
-    <mapper resource="dao/user-role-mapper.xml"></mapper>
-</mappers>
+    <mappers>
+        <mapper resource="dao/userinfo-mapper.xml"/>
+        <mapper resource="dao/user-role-mapper.xml"></mapper>
+    </mappers>
 </configuration>
