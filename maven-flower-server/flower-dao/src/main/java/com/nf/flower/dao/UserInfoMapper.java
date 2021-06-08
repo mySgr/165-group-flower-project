@@ -12,4 +12,12 @@ public interface UserInfoMapper {
     UserInfoEntity userLogin(@Param("phone")String phone, @Param("password") String password);
 
     UserInfoEntity getUserInfo(int id);
+
+     UserInfoEntity getUserByPhone(String phone);
+
+    int insertUserInfo (UserInfoEntity userInfoEntity);
+
+
+
+
 }

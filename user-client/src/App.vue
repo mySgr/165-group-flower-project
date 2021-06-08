@@ -1,34 +1,40 @@
 <template>
-  <div id="app">
-    
-    <router-view></router-view>
-  </div>
+    <div id="app">
+
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-export default {
-  name: "app",
-  methods: {
-    test() {
-      let obj = new FormData();
-      obj.append("phone", "110");
-      obj.append("password", "123123");
-      this.$axios.get("/api/test", {
-        params: { name: "admin" },
-      })
-        .then((result) => {
-          console.log(result);
-        })
-        .catch((err) => {});
-    },
-  },
-  created() {
-    this.test();
-  },
-};
+    export default {
+        name: "app",
+        data() {
+            return {
+                user: {}
+            }
+
+        },
+        methods: {
+            test() {
+                this.$axios({
+                    method: 'post',
+                    url: '/api/user/login',
+                    data: {phone: 110, password: 123123}
+                }).then((result) => {
+                    this.user = result.data.data
+                })
+
+            },
+        },
+        created() {
+            this.test();
+        },
+    };
 </script>
-*{
-  margin:0px;
-  padding:0px;
-}
+
 <style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+</style>
