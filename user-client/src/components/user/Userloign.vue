@@ -13,8 +13,8 @@
     export default {
         data() {
             return {
-                phone: "",
-                password: "",
+                phone: "110",
+                password: "123123",
             }
         },
         methods: {

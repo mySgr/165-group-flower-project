@@ -3,7 +3,7 @@
         <!--   顶部导航栏   -->
         <el-menu
                 router
-                :default-active="activeIndex"
+                :default-active="$route.path"
                 mode="horizontal"
                 active-text-color="#FB7299"
 
@@ -31,8 +31,8 @@
                     <span>订单管理</span>
 
                 </el-menu-item>
-                <el-menu-item index="2-3">
-                    <i class="el-icon-user-solid"></i>
+                <el-menu-item index="/"  @click="userLogout">
+                    <i class="el-icon-switch-button"></i>
                     <span>退出用户</span>
                 </el-menu-item>
             </el-submenu>
@@ -65,7 +65,14 @@
 
             };
         },
-        methods: {},
+        methods: {
+            userLogout() {
+                window.sessionStorage.clear();
+                location.reload()
+
+
+            }
+        },
 
         created() {
         },
