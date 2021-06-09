@@ -71,6 +71,7 @@ CREATE TABLE flower(
   flower_id INT AUTO_INCREMENT COMMENT'鲜花编号' ,     
   flower_name VARCHAR(32) COMMENT'鲜花名称',               
   title VARCHAR(32) COMMENT'鲜花标题', 
+  
   cover VARCHAR(128) COMMENT'封面图',
   material VARCHAR(60) COMMENT'材料',             
   pack  VARCHAR(60) COMMENT'包装',
@@ -78,7 +79,8 @@ CREATE TABLE flower(
   price DECIMAL(10,2) COMMENT'销售价格',            
   stock INT COMMENT'库存',
   buy_Count INT COMMENT'已售数量',
-  		
+
+   
   flower_language  VARCHAR(40) COMMENT'花语',     
   details VARCHAR(60) COMMENT'产品说明',
                

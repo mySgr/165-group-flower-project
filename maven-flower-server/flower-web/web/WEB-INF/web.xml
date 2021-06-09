@@ -3,4 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+
+
+
+    <!-- exception-type 相关的错误页面
+     由于Throwable是java的顶级异常，所以下面的配置
+     意思是只要出了错就由/error代表的servlet去处理
+     -->
+    <error-page>
+        <exception-type>
+            java.lang.Throwable
+        </exception-type >
+        <location>/error</location>
+    </error-page>
 </web-app>
