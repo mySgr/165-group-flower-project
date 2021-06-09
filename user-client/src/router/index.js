@@ -6,7 +6,7 @@ import HomeContent from '../components/home/HomeContent'
 import UserInfo from '../components/user/UserInfo'
 import Userloign from '../components/user/Userloign'
 import UserInfologon from "../components/user/UserInfologon";
-
+import UserInfoSetting from "../components/user/UserInfoSetting"
 import Reply from '../components/message/Message'
 
 Vue.use(VueRouter)
@@ -20,7 +20,13 @@ const routes = [
         component: Index,
         children: [
             {path: '/index', component: HomeContent},
-            {path: '/user', component: UserInfo},
+            {
+                path: '/user',
+                component: UserInfo,
+                children:[{
+                    path:'/user/setting',component:UserInfoSetting}
+                    ]
+            },
             {path: '/reply', component: Reply},
             {path: '/login', component: Userloign},
             {path: '/logon', component: UserInfologon}

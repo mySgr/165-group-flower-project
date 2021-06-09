@@ -6,6 +6,7 @@ import com.nf.flower.util.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +30,8 @@ public class UserInfoServiceImpl {
     public UserInfoEntity getUserInfo(int id) {
         try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
             UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
-            return mapper.getUserInfo(id);
+            UserInfoEntity userInfo = mapper.getUserInfo(id);
+            return userInfo;
         }
     }
 
@@ -73,7 +75,9 @@ public class UserInfoServiceImpl {
     }
 
     public static void main(String[] args) {
+
         UserInfoEntity userInfoEntity1 = new UserInfoEntity();
+
 
         userInfoEntity1.setUserName("cc");
         userInfoEntity1.setPassword("123123");
