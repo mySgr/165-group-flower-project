@@ -24,10 +24,11 @@
         },
         methods: {
             usergoin: function () {
-                this.axios({
+                this.$axios({
                     url: "/api/user/logon",
                     method: "post",
-                    data: {password: this.password, phone: this.phone, userName: this.userName}
+                    data: {password: this.password, phone: this.phone, userName: this.userName},// {id:1,name:'a'}
+                    //params: {id=1&name=a}
                 }).then(resp => {
                     if (resp.data.code !== 200) {
                         alert(resp.data.message)

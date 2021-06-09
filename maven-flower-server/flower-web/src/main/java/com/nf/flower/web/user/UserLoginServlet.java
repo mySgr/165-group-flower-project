@@ -28,8 +28,6 @@ public class UserLoginServlet extends MyHttpServlet {
         System.out.println(s);
         UserInfoEntity userParams = JsonUtil.string2Object(s, UserInfoEntity.class);
 
-
-
         UserInfoEntity userInfoEntity = new UserInfoServiceImpl().userLogin(userParams.getPhone(), userParams.getPassword());
 
         if (userInfoEntity != null) {

@@ -70,7 +70,6 @@
                 window.sessionStorage.clear();
                 location.reload()
 
-
             }
         },
 

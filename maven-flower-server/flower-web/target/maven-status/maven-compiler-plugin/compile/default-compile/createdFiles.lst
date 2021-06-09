@@ -1,5 +1,6 @@
 com\nf\flower\web\user\UserLogonServlet.class
 com\nf\flower\web\MyHttpServlet.class
+com\nf\flower\web\user\UserInfoServlet.class
 com\nf\flower\vo\ResultVO.class
 com\nf\flower\web\user\UserLoginServlet.class
 com\nf\flower\web\err\ErrorHandlerServlet.class
