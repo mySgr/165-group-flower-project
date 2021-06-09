@@ -48,7 +48,7 @@
 
                     <el-submenu index="2">
                         <template slot="title">
-                            <i class="iconfont icon-cangku"></i>
+                            <i class="el-icon-house"></i>
                             <span>仓库管理</span>
                         </template>
                         <el-menu-item index="/home/order/list">
@@ -62,6 +62,9 @@
                         </template>
                         <el-menu-item index="/booklist">
                             <span>商品列表</span>
+                        </el-menu-item>
+                        <el-menu-item index="/addflower">
+                            <span>添加商品</span>
                         </el-menu-item>
                         <!--                        <el-menu-item index="/bookclassify">-->
                         <!--                            <span>书籍分类</span>-->

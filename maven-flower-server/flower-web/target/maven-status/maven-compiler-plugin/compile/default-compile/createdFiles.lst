@@ -4,3 +4,4 @@ com\nf\flower\vo\ResultVO.class
 com\nf\flower\web\user\UserLoginServlet.class
 com\nf\flower\web\err\ErrorHandlerServlet.class
 com\nf\flower\filter\EncodingFilter.class
+com\nf\flower\web\TestServlet.class

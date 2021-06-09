@@ -5,7 +5,7 @@
         <div class="carouserl">
             <el-carousel height="480px" direction="vertical">
                 <el-carousel-item v-for="item in dataImage" :key="item">
-                    <img :src="item">
+                    <img :src="item" width="100%">
                 </el-carousel-item>
                 <div class="left-nav">
                     <h5>鲜花导购</h5>
@@ -52,7 +52,8 @@
             return {
                 dataImage: ["https://img02.hua.com/zhuanti/birthday/pc/banner_lover.png",
                     "https://img02.hua.com/zhuanti/ertongjie/2020/pc_banner.jpg",
-                    "http://img.21xianhua.com/upload/2021/01/07/54ab24c633eddad34b5b790c1e09ba3b"
+                    "http://img.21xianhua.com/upload/2021/01/07/54ab24c633eddad34b5b790c1e09ba3b",
+                    "https://img02.hua.com/zhuanti/graduation/2020/pc_banner.png"
                 ]
             }
         }
