@@ -9,11 +9,11 @@
         <el-card class="box-card">
 
             <el-form inline :model="flowerinfo" label-width="90px">
-                <el-form-item label="鲜花名称：">
-                    <el-input v-model="flowerinfo.flowerName" placeholder="请输入鲜花名称"></el-input>
-                </el-form-item>
                 <el-form-item label="鲜花标题：">
                     <el-input v-model="flowerinfo.title" placeholder="请输入鲜花标题"></el-input>
+                </el-form-item>
+                <el-form-item label="花语：">
+                    <el-input v-model="flowerinfo.language" placeholder="请输入花语"></el-input>
                 </el-form-item>
                 <el-form-item label="上下架：">
                     <el-switch
@@ -31,20 +31,6 @@
                 <el-form-item label="包装：">
                     <el-input v-model="flowerinfo.pack" placeholder="请输入包装材料"></el-input>
                 </el-form-item>
-                <el-form-item label="花语：">
-                    <el-input v-model="flowerinfo.language" placeholder="请输入花语"></el-input>
-                </el-form-item>
-                <el-form-item label="入库数量：">
-                    <el-input-number v-model="flowerinfo.stock" :min="0" :step="1"></el-input-number>
-                </el-form-item>
-
-                <el-form-item label="已售数量：" label-width="100px">
-                    <el-input-number v-model="flowerinfo.buyCount" :min="0" :step="1"></el-input-number>
-                </el-form-item>
-                <el-form-item label="销售价格：" label-width="100px">
-                    <el-input-number v-model="flowerinfo.price" :precision="2" :min="0" :step="1.00"></el-input-number>
-                </el-form-item>
-
                 <el-form-item label="存放仓库：">
                     <el-select size="small" v-model="flowerinfo.warehouseId" placeholder="请选择">
                         <el-option
@@ -55,7 +41,17 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="分类：">
+                <el-form-item label="入库数量：">
+                    <el-input-number v-model="flowerinfo.stock" :min="0" :step="1"></el-input-number>
+                </el-form-item>
+
+
+                <el-form-item label="销售价格：" label-width="100px">
+                    <el-input-number v-model="flowerinfo.price" :precision="2" :min="0" :step="1.00"></el-input-number>
+                </el-form-item>
+
+
+                <el-form-item label="鲜花类别：" label-width="100px">
                     <el-select size="small" v-model="flowerinfo.sortId" placeholder="请选择">
                         <el-option
                                 v-for="item in options"
@@ -65,7 +61,7 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="用途：">
+                <el-form-item label="鲜花用途：" style="display: block">
                     <el-select size="small" v-model="flowerinfo.sortId" placeholder="请选择">
                         <el-option
                                 v-for="item in options"
@@ -82,6 +78,7 @@
                         <input type="file" ref="uploadRef" style="display: none" @change="inputFileChange">
                     </div>
                 </el-form-item>
+
             </el-form>
             <!--上传详细图片表单-->
             <el-form inline label-width="90px">

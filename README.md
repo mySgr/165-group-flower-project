@@ -47,7 +47,13 @@
 1. 每个组员，都登录自己的账号，然后，fork 这个项目
 2. 每个组员，将自己账号下面的此项目clone 到本地
 3. 每个组员，在本地的 git 仓库下，创建一个分支，分支名为自己的名字（比如，江江的分支名为 jj)，以后进行代码的推送或 PR 要基于自己的分支
-4. 随时`git pull` 一下，看看有没有代码更新。
+4. 下游仓库同步上游仓库的步骤
+   1. 查看所有的远程库的远程地址 : `git remote -v`
+   2. 添加源分支 URL : `git remote add upstream [上游仓库URL]`
+   3. 查看是否添加成功：`git remote -v`
+   4. 从源分支获取最新的代码：`git fetch upstream`
+   5. 合并本地分支和源分支：`git merge upstream/master`
+   6. 最后 push 到 fork 分支：`git push`
 
 前端：
 
