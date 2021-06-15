@@ -8,6 +8,7 @@ import Userloign from '../components/user/Userloign'
 import UserInfologon from "../components/user/UserInfologon";
 import UserInfoSetting from "../components/user/UserInfoSetting"
 import Reply from '../components/message/Message'
+import UserInfoAvatar from "../components/user/UserInfoAvatar";
 
 Vue.use(VueRouter)
 
@@ -23,9 +24,11 @@ const routes = [
             {
                 path: '/user',
                 component: UserInfo,
-                children:[{
-                    path:'/user/setting',component:UserInfoSetting}
+                children:[
+                    {path:'/user/setting',component:UserInfoSetting},
+                    {path:'/user/avatar',component:UserInfoAvatar},
                     ]
+
             },
             {path: '/reply', component: Reply},
             {path: '/login', component: Userloign},

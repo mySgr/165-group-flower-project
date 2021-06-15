@@ -3,6 +3,7 @@ package com.nf.flower.util;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.PutObjectResult;
+import com.sun.media.jfxmediaimpl.HostUtils;
 
 import java.io.*;
 import java.util.Properties;
@@ -48,5 +49,7 @@ public class OssUtils {
         return putObjectResult;
     }
 
-
+    public static void main(String[] args) {
+        System.out.println(getOSSClient());
+    }
 }

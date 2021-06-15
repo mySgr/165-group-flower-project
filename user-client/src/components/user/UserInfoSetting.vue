@@ -1,46 +1,76 @@
 <template>
-        <el-form ref="form" :model="form" label-width="120px">
-            <el-form-item label="Activity name">
-                <el-input v-model="form.name"></el-input>
-            </el-form-item>
-            <el-form-item label="Activity zone">
-                <el-select v-model="form.region" placeholder="please select your zone">
-                    <el-option label="Zone one" value="shanghai"></el-option>
-                    <el-option label="Zone two" value="beijing"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="Activity time">
-                <el-col :span="11">
-                    <el-date-picker type="date" placeholder="Pick a date" v-model="form.date1" style="width: 100%;"></el-date-picker>
-                </el-col>
-                <el-col class="line" :span="2">-</el-col>
-                <el-col :span="11">
-                    <el-time-picker placeholder="Pick a time" v-model="form.date2" style="width: 100%;"></el-time-picker>
-                </el-col>
-            </el-form-item>
-        </el-form>
+    <el-form ref="form" :model="user" label-width="120px">
+        <el-form-item label="昵称">
+            <el-input v-model="user.userName"></el-input>
+        </el-form-item>
+        <el-form-item label="我的签名">
+            <el-input type="textarea" v-model="user.autograph"></el-input>
 
+        </el-form-item>
+        <el-form-item label="xx">
+            <el-date-picker
+                    v-model="user.birthdate"
+                    type="date"
+                    placeholder="修改生日"
+                    value-format="yyyy-MM-dd">
+            </el-date-picker>
+        </el-form-item>
+        <el-form-item label="注册时间">
+            <el-date-picker
+                    readonly
+                    v-model="user.created"
+                    type="date">
+            </el-date-picker>
+
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="add">保存</el-button>
+        </el-form-item>
+
+    </el-form>
 </template>
 <script>
     export default {
         data() {
             return {
-                form: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
-                }
+                user: {},
+
             }
         },
         methods: {
-            onSubmit() {
-                console.log('submit!');
-            }
+            loadUser: function () {
+                this.user = JSON.parse(window.sessionStorage.getItem("user"))
+                this.axios({
+                    url: "/api/getuser",
+                    method: "get",
+                    params: {userId: this.user.userId}
+                }).then(r => {
+                    console.log(r)
+                    if (r.data.code == 200) {
+                        this.user = r.data.data;
+                    }
+                })
+
+            },
+            add() {
+
+                this.axios({
+                    url: "/api/UpdateUserInfo",
+                    method: "post",
+                    data: this.user,
+                }).then(r => {
+                    if (r.data.code == 200) {
+                        window.sessionStorage.clear();
+                        window.sessionStorage.setItem("user", JSON.stringify(this.user))
+                        this.loadUser()
+                        location.reload()
+                        alert(r.data.message)
+                    }
+                })
+            },
+        },
+        created() {
+            this.loadUser()
         }
     }
 </script>

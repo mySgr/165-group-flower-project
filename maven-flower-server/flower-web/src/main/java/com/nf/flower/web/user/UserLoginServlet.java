@@ -24,10 +24,10 @@ public class UserLoginServlet extends MyHttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        final String s = req.getReader().readLine();
-        System.out.println(s);
-        UserInfoEntity userParams = JsonUtil.string2Object(s, UserInfoEntity.class);
+         String s = req.getReader().readLine();
 
+        UserInfoEntity userParams = JsonUtil.string2Object(s, UserInfoEntity.class);
+        System.out.println(s);
         UserInfoEntity userInfoEntity = new UserInfoServiceImpl().userLogin(userParams.getPhone(), userParams.getPassword());
 
         if (userInfoEntity != null) {

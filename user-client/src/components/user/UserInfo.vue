@@ -13,7 +13,7 @@
                         <el-menu-item index="2">
                             <span>会员信息</span>
                         </el-menu-item>
-                        <el-menu-item index="3">
+                        <el-menu-item index="/user/avatar">
                             <span>我的头像</span>
                         </el-menu-item>
                     </el-menu>

@@ -3,7 +3,7 @@
 
 
         <div class="carouserl">
-            <el-carousel height="480px" direction="vertical">
+            <el-carousel height="305px" direction="vertical">
                 <el-carousel-item v-for="item in dataImage" :key="item">
                     <img :src="item" width="100%">
                 </el-carousel-item>
@@ -39,6 +39,20 @@
                 </div>
             </el-carousel>
 
+            <h1>鲜花热销</h1>
+            <div class="flowerInfo">
+                <el-card v-for="(i,index) in imgas" :key="index" class="flower">
+
+                    <div>
+                        title: {{i.title}}
+                    </div>
+                    <img :src="i.url">
+
+                    <div>price:99$</div>
+                </el-card>
+
+            </div>
+            <h1>新品上市</h1>
         </div>
 
     </div>
@@ -54,7 +68,8 @@
                     "https://img02.hua.com/zhuanti/ertongjie/2020/pc_banner.jpg",
                     "http://img.21xianhua.com/upload/2021/01/07/54ab24c633eddad34b5b790c1e09ba3b",
                     "https://img02.hua.com/zhuanti/graduation/2020/pc_banner.png"
-                ]
+                ],
+                imgas: [1, 2, 3, 4, 5,]
             }
         }
     }
@@ -81,7 +96,7 @@
         width: 210px;
         position: absolute;
         z-index: 999;
-        height: 480px;
+        height: 305px;
         background: url("../../assets/image/black-bg.png");
     }
 
@@ -92,17 +107,35 @@
     }
 
     /* 鲜花类型样式 艰难困苦，玉汝于成。*/
-    .flowr-class h5{
+    .flowr-class h5 {
         margin-top: 10px;
         margin-left: 10px;
         margin-bottom: 3px;
     }
-    .flowr-class span{
+
+    .flowr-class span {
         font-size: 14px;
         margin-left: 10px;
     }
-    .flowr-class span:hover{
+
+    .flowr-class span:hover {
         color: #FB7299;
+    }
+
+
+    /*    flower */
+    .flowerInfo {
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .flowerInfo .flower {
+        padding-left: 2px;
+        margin: 5px;
+        width: 200px;
+        border: 1px solid #e6e6e6;
+        height: 300px;
     }
 
 

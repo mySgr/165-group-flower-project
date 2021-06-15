@@ -52,14 +52,13 @@ public class UserInfoServiceImpl {
             entity.setStatus(1);
             entity.setAvatar("avatar/default-avatar.jpg");
             entity.setCreated(LocalDateTime.now());
-
-
-       UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+            UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
             mapper.insertUserInfo(entity);
             return entity;
         }
     }
 
+    //搭配随机数生成数据库随机用户编号
     public static Integer getUserID() {
         int maxid = 100000000;
         int minid = 10000;
@@ -74,18 +73,38 @@ public class UserInfoServiceImpl {
 
     }
 
-    public static void main(String[] args) {
-
-        UserInfoEntity userInfoEntity1 = new UserInfoEntity();
-
-
-        userInfoEntity1.setUserName("cc");
-        userInfoEntity1.setPassword("123123");
-        userInfoEntity1.setPhone("4555");
-
-        UserInfoEntity userInfoEntity = new UserInfoServiceImpl().insertUserInfo(userInfoEntity1);
-        System.out.println(userInfoEntity);
+    //修改用户的信息，修改用户名，签名，出生时间
+    public int updateUserInfo(UserInfoEntity userInfoEntity) {
+        try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
+            UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+           return mapper.updateUserInfo(userInfoEntity);
+        }
     }
 
+    //修改用户头像
+    public int updateUserInfoAvatar(String avatar,int userId) {
+        try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
+            UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+            return mapper.updateUserInfoAvatar(avatar,userId);
+        }
+    }
+
+
+    //更换用户的图片并保存
+    public List<UserInfoEntity> userInfoAvatar(){
+        try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
+            UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+            return mapper.userInfoAvatar();
+        }
+    }
+
+    public static void main(String[] args) {
+
+
+        UserInfoEntity userInfo = new UserInfoServiceImpl().getUserInfo(10001);
+        System.out.println(userInfo.getAvatarSrc());
+        System.out.println(userInfo);
+
+    }
 
 }
