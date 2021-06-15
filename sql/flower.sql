@@ -47,29 +47,35 @@ CREATE TABLE user_member
 
 
 -- 仓库表
-CREATE TABLE warehouse
+CREATE TABLE flower_warehouse
 (
 	id INT AUTO_INCREMENT COMMENT'仓库编号',
 	ware_name VARCHAR(100) COMMENT '仓库名称',
 	
-	capactiy INT COMMENT '仓库容量',
-	surplus INT COMMENT '剩余容量',
+	capacity INT COMMENT '仓库总容量',
+	stock INT COMMENT '当前仓库存量',
+	`status` INT COMMENT '仓库状态 ，1 正常 2，仓库已满',
 	ware_explain VARCHAR(1000) COMMENT '存放说明',
 	PRIMARY KEY(id)
 	
 )
 
-/*******鲜花类别*******/
-CREATE TABLE flower_sort(
-  sort_id INT AUTO_INCREMENT, 
-  sort_name VARCHAR(32),  #类别
-  PRIMARY KEY(sort_id)
-);
+-- 仓库数据
+INSERT INTO flower_warehouse(ware_name,capacity,stock,`status`,ware_explain) VALUES('一号仓库',1000,0,1,'此仓库只存放玫瑰系列的花')
+
+
+
+/**鲜花用途表**/
+CREATE TABLE flower_purpose(
+	purpose_id INT AUTO_INCREMENT COMMENT '编号', 
+	purpose_name VARCHAR(50) COMMENT '用途名称',
+	PRIMARY KEY(purpose_id)
+)
+INSERT INTO flower_purpose(purpose_name) VALUES('生日祝福')
 
 /**鲜花表**/
-CREATE TABLE flower(
+CREATE TABLE flower_info(
   flower_id INT AUTO_INCREMENT COMMENT'鲜花编号' ,     
-  flower_name VARCHAR(32) COMMENT'鲜花名称',               
   title VARCHAR(32) COMMENT'鲜花标题', 
   
   cover VARCHAR(128) COMMENT'封面图',
@@ -78,33 +84,35 @@ CREATE TABLE flower(
   
   price DECIMAL(10,2) COMMENT'销售价格',            
   stock INT COMMENT'库存',
-  buy_Count INT COMMENT'已售数量',
+  buy_Count INT DEFAULT 0 NOT NULL COMMENT'已售数量',
 
    
   flower_language  VARCHAR(40) COMMENT'花语',     
   details VARCHAR(60) COMMENT'产品说明',
                
-  flower_status INT COMMENT'鲜花状态，1 表示上架，2 表示下架',
+  `status` INT COMMENT'鲜花状态，1 表示上架，2 表示下架',
   created DATETIME NOT NULL DEFAULT NOW() COMMENT'创建时间',
   
-  sort_id INT COMMENT'鲜花分类编号',   
+
+  purpose_id INT COMMENT '鲜花用途编号',
   warehouse_id INT COMMENT'仓库编号',
   PRIMARY KEY(flower_id)
   )		
      
-
+SELECT * FROM flower_info
+DELETE FROM flower_info
 
 /**鲜花图片**/
 CREATE TABLE flower_picture(
   picture_id INT PRIMARY KEY AUTO_INCREMENT,    #鲜花图片编号
   flower_id INT,                    		#鲜花编号
-  img VARCHAR(128)         			#图片路径
+  img_url VARCHAR(128)         			#图片路径
 );
+SELECT * FROM FLOWER_picture
 
-
-
-
+DROP TABLE flower_picture
 DROP TABLE user_member
+
 SELECT * FROM user_role
 
         SELECT

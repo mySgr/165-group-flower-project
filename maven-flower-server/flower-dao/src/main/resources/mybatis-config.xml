@@ -6,7 +6,9 @@
 
     <properties resource="db.properties"></properties>
     <settings>
+    <!--  下划线转驼峰  -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        打印日志-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
     <typeAliases>
@@ -25,6 +27,11 @@
     </environments>
     <mappers>
         <mapper resource="dao/userinfo-mapper.xml"/>
-        <mapper resource="dao/user-role-mapper.xml"></mapper>
+        <mapper resource="dao/user-role-mapper.xml"/>
+
+        <mapper resource="dao/commodity/flowerinfo-mapper.xml"/>
+        <mapper resource="dao/commodity/flower-picture-mapper.xml"/>
+        <mapper resource="dao/commodity/flower-purpose-mapper.xml"/>
+        <mapper resource="dao/commodity/flower-warehouse-mapper.xml"/>
     </mappers>
 </configuration>

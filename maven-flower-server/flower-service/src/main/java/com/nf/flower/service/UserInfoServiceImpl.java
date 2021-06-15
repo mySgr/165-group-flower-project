@@ -6,7 +6,6 @@ import com.nf.flower.util.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -46,13 +45,15 @@ public class UserInfoServiceImpl {
     // 添加注册的用户
     public UserInfoEntity insertUserInfo(UserInfoEntity entity) {
         try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
-            // default
+           // 默认的值
             entity.setUserId(getUserID());
             entity.setRoleId(1);
             entity.setStatus(1);
             entity.setAvatar("avatar/default-avatar.jpg");
             entity.setCreated(LocalDateTime.now());
-            UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
+
+
+       UserInfoMapper mapper = sqlSession.getMapper(UserInfoMapper.class);
             mapper.insertUserInfo(entity);
             return entity;
         }

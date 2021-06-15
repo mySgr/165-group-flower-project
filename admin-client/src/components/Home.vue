@@ -23,7 +23,7 @@
             <el-aside :width="fold?'64px':'200px'">
                 <!-- 侧边栏菜单区域 -->
                 <el-menu :collapse-transition="false" router :collapse="fold" background-color="#545c64"
-                         text-color="#fff" active-text-color="#ffd04b" unique-opened>
+                         :default-active="$route.path" text-color="#fff" active-text-color="#ffd04b" unique-opened>
                     <!-- 折叠菜单 -->
                     <div class="fold" :title="title" @click="doFold">
                         <span :class="fold ? 'el-icon-s-unfold' : 'el-icon-s-fold'"></span>
@@ -60,8 +60,8 @@
                             <i class="el-icon-notebook-2"></i>
                             <span>商品管理</span>
                         </template>
-                        <el-menu-item index="/booklist">
-                            <span>商品列表</span>
+                        <el-menu-item index="/flower/list">
+                            <span>鲜花列表</span>
                         </el-menu-item>
                         <el-menu-item index="/addflower">
                             <span>添加商品</span>
@@ -108,7 +108,6 @@
                     <router-view></router-view>
                 </div>
 
-
             </el-main>
         </el-container>
     </el-container>
@@ -126,7 +125,6 @@
                     color: "#ffd04b"
                 },
                 user: {user: 'admin'}
-
             }
         },
         methods: {

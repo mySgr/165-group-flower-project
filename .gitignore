@@ -4,12 +4,10 @@ node_modules
 
 target
 
+aliyunoss.properties
+
 *.jar
 *.war
-
-*.jpg
-*.png
-*.gif
 
 # local env files
 .env.local
@@ -29,4 +27,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-

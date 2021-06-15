@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // 导航组件
 import Home from '../components/Home.vue'
 import AddFlower from '../components/commodity/AddFlower'
+import FlowerInfoList from '../components/commodity/FlowerInfoList'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,8 @@ const routes = [
         path: '/',
         component: Home,
         children: [
-            {path: '/addflower', component: AddFlower}
+            {path: '/addflower', component: AddFlower},
+            {path: '/flower/list', component: FlowerInfoList}
         ]
     },
 

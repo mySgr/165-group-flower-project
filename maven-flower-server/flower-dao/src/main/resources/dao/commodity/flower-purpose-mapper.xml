@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.flower.dao.FlwoerPurposeMapper">
+
+    <select id="getPurposeList" resultType="FlowerPurposeEntity">
+        select purpose_id,purpose_name from flower_purpose
+    </select>
+
+</mapper>

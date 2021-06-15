@@ -15,14 +15,11 @@
     <artifactId>flower-web</artifactId>
 
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
 
         </dependency>
-
         <dependency>
             <groupId>com.nf.flower</groupId>
             <artifactId>flower-service</artifactId>

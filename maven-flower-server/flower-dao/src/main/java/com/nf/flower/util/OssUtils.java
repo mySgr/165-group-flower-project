@@ -40,12 +40,12 @@ public class OssUtils {
 
     /**
      *  此静态方法可上传图片
-     * @param save   保存为什么名
+     * @param saveName   保存为什么名
      * @param inputStream      上传的文件
      * @return
      */
-    public static PutObjectResult uploadImage(String save, InputStream inputStream) {
-        PutObjectResult putObjectResult = getOSSClient().putObject(BUCKET_NAME, save, inputStream);
+    public static PutObjectResult uploadImage(String saveName, InputStream inputStream) {
+        PutObjectResult putObjectResult = getOSSClient().putObject(BUCKET_NAME, saveName, inputStream);
         return putObjectResult;
     }
 

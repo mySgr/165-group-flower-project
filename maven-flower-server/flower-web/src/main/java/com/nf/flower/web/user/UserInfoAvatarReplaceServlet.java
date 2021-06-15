@@ -4,6 +4,7 @@ import cn.hutool.core.io.resource.InputStreamResource;
 import cn.hutool.http.HttpUtil;
 import com.nf.flower.entity.UserInfoEntity;
 import com.nf.flower.service.UserInfoServiceImpl;
+import com.nf.flower.tools.Common;
 import com.nf.flower.util.JsonUtil;
 import com.nf.flower.vo.ResultVO;
 
@@ -32,7 +33,7 @@ public class UserInfoAvatarReplaceServlet extends HttpServlet {
         String userId = req.getParameter("userId");
 
         // name
-        String avatar ="avatar/"+ UUID.randomUUID()+"_"+ part.getSubmittedFileName();
+        String avatar = "avatar/" + UUID.randomUUID() + "_" + part.getSubmittedFileName();
         // file
         InputStream inputStream = part.getInputStream();
         System.out.println(avatar);
@@ -43,8 +44,8 @@ public class UserInfoAvatarReplaceServlet extends HttpServlet {
         Map<String, Object> map = new HashMap<>();
         map.put("avatar", inputStreamResource);
 
-       HttpUtil.post("http://172.16.1.152:9090/upload/avatar/", map);
-       // sql
+        HttpUtil.post(Common.ADDRESS + "avatar/", map);
+        // sql
         int i = new UserInfoServiceImpl().updateUserInfoAvatar(avatar, Integer.parseInt(userId));
         if (i <= 0) {
             resp.getWriter().println(JsonUtil.object2String(ResultVO.error(-1, "修改err")));

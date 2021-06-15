@@ -1,5 +1,7 @@
 package com.nf.flower.entity;
 
+import com.nf.flower.tools.Common;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -80,8 +82,9 @@ public class UserInfoEntity {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
     public String getAvatarSrc() {
-        return "http://172.16.1.152:9090/upload/" + avatar;
+        return Common.ADDRESS + avatar;
     }
 
     public String getAutograph() {
