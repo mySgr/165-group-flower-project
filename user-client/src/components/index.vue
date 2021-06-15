@@ -19,7 +19,8 @@
 
             <el-submenu index="2" style="float: right" v-if="user!=null||user!=undefined">
                 <template slot="title">
-                    <el-avatar size="medium" :src="avatarSrc"></el-avatar>
+
+                    <el-avatar size="medium" :src="user.avatarSrc"></el-avatar>
                     <span>{{user.userName}}</span>
                 </template>
                 <el-menu-item index="/user">
@@ -31,7 +32,7 @@
                     <span>订单管理</span>
 
                 </el-menu-item>
-                <el-menu-item index="/"  @click="userLogout">
+                <el-menu-item index="/" @click="userLogout">
                     <i class="el-icon-switch-button"></i>
                     <span>退出用户</span>
                 </el-menu-item>
@@ -48,7 +49,7 @@
         </el-menu>
 
         <!--  路由 -->
-        <div id="body">
+        <div id="body" >
             <router-view></router-view>
         </div>
     </div>
@@ -59,9 +60,8 @@
     export default {
         data() {
             return {
-                activeIndex: "/home",
-                user: JSON.parse(window.sessionStorage.getItem("user")),
-                avatarSrc: require('../assets/image/avatar.jpg'),
+
+                user: {}
 
             };
         },
@@ -69,11 +69,31 @@
             userLogout() {
                 window.sessionStorage.clear();
                 location.reload()
-
+            },
+            userLoad() {
+                this.$axios({
+                    method: 'get',
+                    url: '/api/getuser',
+                    params: {
+                        userId: this.user.userId
+                    }
+                }).then(result => {
+                    if (result.data.code == 200) {
+                        this.user = result.data.data
+                        console.log(this.user)
+                    }
+                })
             }
+
         },
 
         created() {
+            this.user = JSON.parse(window.sessionStorage.getItem("user"))
+            if (this.user != undefined || this.user != null) {
+                 this.user.avatarSrc=' http://172.16.1.152:9090/upload/4.png'
+                this.userLoad()
+            }
+
         },
     };
 </script>

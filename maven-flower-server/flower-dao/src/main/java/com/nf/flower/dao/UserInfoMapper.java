@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserInfoMapper {
     List<UserInfoEntity> getUser(int id);
 
+
     UserInfoEntity userLogin(@Param("phone")String phone, @Param("password") String password);
 
     UserInfoEntity getUserInfo(int id);
@@ -17,9 +18,12 @@ public interface UserInfoMapper {
 
     int insertUserInfo (UserInfoEntity userInfoEntity);
 
+    int updateUserInfo(UserInfoEntity userInfoEntity);
 
 
+    List<UserInfoEntity> userInfoAvatar();
 
+     int updateUserInfoAvatar (@Param("avatar")String avatar, @Param("userId") int userId);
 
 
 }
