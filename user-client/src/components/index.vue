@@ -23,7 +23,7 @@
                     <el-avatar size="medium" :src="user.avatarSrc"></el-avatar>
                     <span>{{user.userName}}</span>
                 </template>
-                <el-menu-item index="/user">
+                <el-menu-item index="/user/setting">
                     <i class="el-icon-user"></i>
                     <span>个人中心</span>
                 </el-menu-item>
@@ -40,10 +40,10 @@
             <el-menu-item v-else index="/login" style="float: right">login</el-menu-item>
             <el-menu-item index="/reply" style="float: right">消息中心</el-menu-item>
             <el-menu-item index="/cart" style="float: right">购物车</el-menu-item>
-            <el-menu-item index="/member" style="float: right">店铺会员</el-menu-item>
+            <el-menu-item index="#" style="float: right">店铺会员</el-menu-item>
             <el-menu-item style="float: right">
-                <el-input placeholder="商品搜索">
-                    <el-button slot="append" icon="el-icon-search"></el-button>
+                <el-input placeholder="商品搜索" v-model="flower">
+                    <el-button slot="append" icon="el-icon-search" @click="$router.push('/flowersSelect/' +flower)" ></el-button>
                 </el-input>
             </el-menu-item>
         </el-menu>
@@ -60,7 +60,7 @@
     export default {
         data() {
             return {
-
+                flower:"",
                 user: {}
 
             };
@@ -83,7 +83,7 @@
                         console.log(this.user)
                     }
                 })
-            }
+            },
 
         },
 
@@ -103,6 +103,5 @@
         margin: 0% auto;
         width: 80%;
     }
-
 
 </style>

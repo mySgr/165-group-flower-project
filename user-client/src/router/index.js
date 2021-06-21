@@ -9,7 +9,8 @@ import UserInfologon from "../components/user/UserInfologon";
 import UserInfoSetting from "../components/user/UserInfoSetting"
 import Reply from '../components/message/Message'
 import UserInfoAvatar from "../components/user/UserInfoAvatar";
-
+import UserInfoFlowerSelect from "../components/user/UserInfoFlowerSelect"
+import UserInfoContact from "../components/user/UserInfoContact";
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,18 +22,23 @@ const routes = [
         component: Index,
         children: [
             {path: '/index', component: HomeContent},
+
             {
                 path: '/user',
                 component: UserInfo,
                 children:[
+
                     {path:'/user/setting',component:UserInfoSetting},
                     {path:'/user/avatar',component:UserInfoAvatar},
+
                     ]
 
             },
             {path: '/reply', component: Reply},
             {path: '/login', component: Userloign},
-            {path: '/logon', component: UserInfologon}
+            {path: '/logon', component: UserInfologon},
+            {path: '/flowersSelect/:name', component:UserInfoFlowerSelect},
+            {path: '/customer-service', component:UserInfoContact},
         ]
     }
 ]

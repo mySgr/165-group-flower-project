@@ -2,6 +2,7 @@ package com.nf.flower.service;
 
 import com.nf.flower.dao.UserInfoMapper;
 import com.nf.flower.entity.UserInfoEntity;
+import com.nf.flower.entity.commodity.FlowerinfoEntity;
 import com.nf.flower.util.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
@@ -89,7 +90,21 @@ public class UserInfoServiceImpl {
             return mapper.updateUserInfoAvatar(avatar,userId);
         }
     }
+    //遍历鲜花图片
+    public List<FlowerinfoEntity> userInfoSelect() {
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
+        List<FlowerinfoEntity> list = userInfoMapper.userInfoSelect();
+        return  list;
+    }
+    //鲜花查询
 
+    public List<FlowerinfoEntity> selectFlowerLikenameAndprice(String parmen){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
+        List<FlowerinfoEntity> list = userInfoMapper.selectFlowerLikenameAndprice(parmen);
+        return list;
+    }
 
     //更换用户的图片并保存
     public List<UserInfoEntity> userInfoAvatar(){
@@ -100,12 +115,11 @@ public class UserInfoServiceImpl {
     }
 
     public static void main(String[] args) {
+        UserInfoServiceImpl userInfoService = new UserInfoServiceImpl();
+        List<FlowerinfoEntity> list =  userInfoService.selectFlowerLikenameAndprice("牛");
+//        System.out.println(list);
 
-
-        UserInfoEntity userInfo = new UserInfoServiceImpl().getUserInfo(10001);
-        System.out.println(userInfo.getAvatarSrc());
-        System.out.println(userInfo);
-
+        System.out.println(list);
     }
 
 }

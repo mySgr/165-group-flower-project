@@ -32,7 +32,7 @@
                     <el-input v-model="flowerinfo.pack" placeholder="请输入包装材料"></el-input>
                 </el-form-item>
                 <el-form-item label="存放仓库：">
-                    <el-select size="small" v-model="flowerinfo.id" placeholder="请选择">
+                    <el-select size="small" v-model="flowerinfo.warehouseId" placeholder="请选择">
                         <el-option
                                 v-for="item in warehouses"
                                 :key="item.id"

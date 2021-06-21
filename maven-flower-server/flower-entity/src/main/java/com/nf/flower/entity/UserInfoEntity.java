@@ -84,7 +84,7 @@ public class UserInfoEntity {
     }
 
     public String getAvatarSrc() {
-        return Common.ADDRESS + avatar;
+        return Common.IP_ADDRESS + avatar;
     }
 
     public String getAutograph() {

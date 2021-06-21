@@ -1,5 +1,10 @@
 package com.nf.flower.entity.commodity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.nf.flower.tools.Common;
 
 import java.math.BigDecimal;
@@ -55,6 +60,8 @@ public class FlowerinfoEntity {
 
     private Integer status;
 
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime created;
 
 
@@ -93,7 +100,7 @@ public class FlowerinfoEntity {
     }
 
     public String getCoverSrc() {
-        return Common.ADDRESS + cover;
+        return Common.IP_ADDRESS + cover;
     }
 
     public String getMaterial() {
@@ -211,5 +218,19 @@ public class FlowerinfoEntity {
                 ", warehouseId=" + warehouseId +
                 ", flowerPurposeEntity=" + flowerPurposeEntity +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        FlowerinfoEntity entity = new FlowerinfoEntity();
+        entity.setStock(100);
+        entity.setCreated(LocalDateTime.now());
+        String s = null;
+        try {
+            s = objectMapper.writeValueAsString(entity);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        System.out.println(s);
     }
 }
