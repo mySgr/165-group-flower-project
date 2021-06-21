@@ -5,7 +5,7 @@ import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nf.flower.entity.commodity.FlowerPictureEntity;
 import com.nf.flower.service.commodity.FlowerPictureServiceImpl;
-import com.nf.flower.util.OssUtils;
+import com.nf.flower.tools.Common;
 import com.nf.flower.vo.ResultVO;
 import com.nf.flower.web.MyHttpServlet;
 
@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -40,7 +39,7 @@ public class UploadFlowerPictureServlet extends MyHttpServlet {
 
             Map<String, Object> map = new HashMap<>();
             map.put("myfile", inputStreamResource);
-            HttpUtil.post("http://172.16.4.30:9090/upload/flower/", map);
+            HttpUtil.post(Common.IP_ADDRESS +"flower/", map);
 
             // 添加数据库记录
             FlowerPictureEntity entity = new FlowerPictureEntity();

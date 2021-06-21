@@ -41,18 +41,35 @@
 
             <h1>鲜花热销</h1>
             <div class="flowerInfo">
-                <el-card v-for="(i,index) in imgas" :key="index" class="flower">
 
+                <el-card v-for="i in flowerSelect" :key="i.flowerId" class="flower">
+                    <img :src=" 'http://169.254.173.71:9090/upload/'+i.cover" class="cover">
                     <div>
-                        title: {{i.title}}
+                        标题: {{i.title}}
                     </div>
-                    <img :src="i.url">
+                    <div>
+                        价格: {{i.price}}
+                    </div>
 
                     <div>price:99$</div>
                 </el-card>
 
             </div>
             <h1>新品上市</h1>
+            <div class="flowerInfo">
+                <el-card v-for="i in flowerSelect" :key="i.flowerId" class="flower">
+                    <img :src=" 'http://169.254.173.71:9090/upload/'+i.cover" class="cover">
+                    <div>
+                        标题: {{i.title}}
+                    </div>
+                    <div>
+                        价格: {{i.price}}
+                    </div>
+
+                    <div>price:99$</div>
+                </el-card>
+            </div>
+
         </div>
 
     </div>
@@ -69,8 +86,24 @@
                     "http://img.21xianhua.com/upload/2021/01/07/54ab24c633eddad34b5b790c1e09ba3b",
                     "https://img02.hua.com/zhuanti/graduation/2020/pc_banner.png"
                 ],
-                imgas: [1, 2, 3, 4, 5,]
+                flowerSelect: [],
             }
+        },
+        created: function() {
+            this.flowerGetAll()
+        },
+        methods:{
+            flowerGetAll(){
+
+                this.axios({
+                    url:"/api/user/selectFlower",
+                    method:"post",
+                }).then(r => {
+                    this.flowerSelect = r.data;
+                    console.log(r);
+                })
+            },
+
         }
     }
 </script>
@@ -129,13 +162,17 @@
         flex-wrap: wrap;
 
     }
-
-    .flowerInfo .flower {
+    .flower {
         padding-left: 2px;
         margin: 5px;
-        width: 200px;
+        width: 205px;
         border: 1px solid #e6e6e6;
         height: 300px;
+    }
+    .cover{
+        margin-right: 10px;
+        width: 170px;
+        height: 170px;
     }
 
 

@@ -25,6 +25,18 @@
         </where>
     </select>
 
+<!--    鲜花的查询 名字和价格来查询-->
+    <select id="selectFlowerLikenameAndprice"  resultType="FlowerinfoEntity">
+        select * from flower_info
+        <where>
+            <if test="#{param} != null">
+            or title like concat('%',#{param},'%')
+            </if>
+
+        </where>
+        order by created DESC
+    </select>
+
 
 <!--内嵌查询-->
     
@@ -86,4 +98,7 @@
     </select>
 
 
+    <select id="userInfoSelect" resultType="FlowerinfoEntity">
+        select * from  flower_info
+    </select>
 </mapper>

@@ -2,7 +2,6 @@ package com.nf.flower.web.user;
 
 import cn.hutool.core.io.resource.InputStreamResource;
 import cn.hutool.http.HttpUtil;
-import com.nf.flower.entity.UserInfoEntity;
 import com.nf.flower.service.UserInfoServiceImpl;
 import com.nf.flower.tools.Common;
 import com.nf.flower.util.JsonUtil;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -31,20 +29,18 @@ public class UserInfoAvatarReplaceServlet extends HttpServlet {
 
         Part part = req.getPart("avatar");
         String userId = req.getParameter("userId");
-
         // name
         String avatar = "avatar/" + UUID.randomUUID() + "_" + part.getSubmittedFileName();
         // file
         InputStream inputStream = part.getInputStream();
         System.out.println(avatar);
-
         //必须指定文件名
         InputStreamResource inputStreamResource = new InputStreamResource(inputStream, avatar);
 
         Map<String, Object> map = new HashMap<>();
         map.put("avatar", inputStreamResource);
 
-        HttpUtil.post(Common.ADDRESS + "avatar/", map);
+        HttpUtil.post(Common.IP_ADDRESS + "avatar/", map);
         // sql
         int i = new UserInfoServiceImpl().updateUserInfoAvatar(avatar, Integer.parseInt(userId));
         if (i <= 0) {
