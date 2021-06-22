@@ -14,7 +14,7 @@
             <el-menu-item index="/class">分类</el-menu-item>
             <el-menu-item index="/class">花语大全</el-menu-item>
 
-            <el-menu-item index="/customer-service">联系我们</el-menu-item>
+            <el-menu-item index="/customer-service">帮助中心</el-menu-item>
 
 
             <el-submenu index="2" style="float: right" v-if="user!=null||user!=undefined">

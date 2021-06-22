@@ -10,4 +10,16 @@
         values(#{title},#{cover},#{material},#{pack},#{price},#{stock},#{flowerLanguage},#{details},#{status},
         #{purposeId},#{warehouseId})
     </insert>
+
+<!--分页查询，根据热傍来查询销量最高的五条数据进行分组-->
+    <select id="hotFlowerInfo" resultType="FlowerinfoEntity">
+        SELECT flower_id,title,price,buy_count,STATUS ,cover FROM flower_info
+        WHERE STATUS = 1
+        ORDER  BY  buy_count DESC LIMIT 5
+    </select>
+<!--   根据id查询详细的花朵信息 -->
+    <select id="selectFlowerInfo" resultType="FlowerinfoEntity">
+        select title,price,material,flower_language,details,buy_Count,cover from flower_info
+        where flower_id = #{flowerid}
+    </select>
 </mapper>

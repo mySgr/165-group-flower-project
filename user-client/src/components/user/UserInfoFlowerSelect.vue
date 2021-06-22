@@ -22,6 +22,7 @@
     export default {
         data(){
             return{
+                value1:null,
                 flowers:[],
                 selectname:""
             }
@@ -40,6 +41,7 @@
         },
         created() {
            this.selectname=this.$route.params['name'];
+
            this.flowerlikename();
 
         }

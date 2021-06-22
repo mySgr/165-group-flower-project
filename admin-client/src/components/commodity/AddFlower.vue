@@ -109,7 +109,7 @@
                 imageUrl: '',
                 warehouses: [],  // 仓库列表
                 flowerPurpose: [],
-                flowerinfo: {price: 0, stock: 0, status: 0},
+                flowerinfo: {price: 0, stock: 0, status: 2},
                 status: false,
                 flowerinfoRules: {
                     title: [{required: true, message: '请输入鲜花标题', trigger: 'blur'}],
@@ -150,7 +150,7 @@
             },
             // 上下架
             flowerStatusChange(val) {
-                this.flowerinfo.status = this.status ? 1 : 0
+                this.flowerinfo.status = this.status ? 1 : 2
             },
             //封面图发生改变时
             inputFileChange() {
