@@ -224,6 +224,7 @@ public class FlowerinfoEntity {
         ObjectMapper objectMapper = new ObjectMapper();
         FlowerinfoEntity entity = new FlowerinfoEntity();
         entity.setStock(100);
+        entity.setPrice(new BigDecimal(10));
         entity.setCreated(LocalDateTime.now());
         String s = null;
         try {

@@ -10,10 +10,18 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
 <!--        打印日志-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
+
     </settings>
     <typeAliases>
         <package name="com.nf.flower.entity"/>
     </typeAliases>
+    <plugins>
+<!--        配置分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--当我们方dao法中有pageNum与pageSize这2个参数时，插件自动处理分页功能-->
+            <property name="supportMethodsArguments" value="true"/>
+        </plugin>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>

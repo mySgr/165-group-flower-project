@@ -11,6 +11,7 @@
         #{purposeId},#{warehouseId})
     </insert>
 
+<<<<<<< HEAD
 <!--分页查询，根据热傍来查询销量最高的五条数据进行分组-->
     <select id="hotFlowerInfo" resultType="FlowerinfoEntity">
         SELECT flower_id,title,price,buy_count,STATUS ,cover FROM flower_info
@@ -23,5 +24,49 @@
         where flower_id = #{flowerid}
     </select>
 
+=======
+    <!--    修改鲜花状态-->
+    <update id="updateFlowerStatus">
+        update flower_info set status = #{status}
+        where flower_id = #{id}
+    </update>
+
+    <update id="updateFlowerInfoById">
+        update flower_info
+        set title=#{title},cover=#{cover},material=#{material},
+        pack=#{pack},price=#{price},stock=#{stock},flower_language=#{flowerLanguage},
+        details=#{details},status=#{status},purpose_id=#{purposeId},
+        warehouse_id=#{warehouseId}
+        where flower_id = #{flowerId}
+    </update>
+
+
+    <!--  鲜花信息和鲜花用途的结果集  -->
+    <resultMap id="flowerinfoAndFlowerPurpose" type="FlowerinfoEntity" autoMapping="true">
+        <id column="flower_id" property="flowerId"></id>
+        <association property="flowerPurposeEntity" autoMapping="true">
+            <id column="purpose_id" property="purposeId"></id>
+        </association>
+    </resultMap>
+    <!--分页查询-->
+    <select id="flowerInfoQueryList" resultMap="flowerinfoAndFlowerPurpose">
+        SELECT flower_id,title,cover,stock,material,price,STATUS,A.purpose_id,purpose_name FROM flower_info A
+        LEFT JOIN flower_purpose B ON A.purpose_id = B.purpose_id
+        <where>
+            <if test="query!=null">
+                <bind name="query" value="'%'+query+'%'"/>
+                or title like #{query} or purpose_name like #{query}
+            </if>
+        </where>
+    </select>
+
+<!--    根据ID查询鲜花信息-->
+    <select id="qeruyFlowerInfoById" resultType="FlowerinfoEntity">
+        select flower_id,title,cover,material,pack,price,stock,
+        flower_language,details,status,purpose_id,warehouse_id
+        from flower_info where  flower_id = #{flowerId}
+
+    </select>
+>>>>>>> upstream/master
 
 </mapper>

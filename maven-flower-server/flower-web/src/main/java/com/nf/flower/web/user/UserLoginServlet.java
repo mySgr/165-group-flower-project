@@ -1,5 +1,6 @@
 package com.nf.flower.web.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nf.flower.entity.UserInfoEntity;
 import com.nf.flower.service.UserInfoServiceImpl;
 import com.nf.flower.util.JsonUtil;
@@ -24,16 +25,19 @@ public class UserLoginServlet extends MyHttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-         String s = req.getReader().readLine();
-
+        String s = req.getReader().readLine();
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (s == null) {
+            resp.getWriter().println(objectMapper.writeValueAsString(ResultVO.error(400, "参数不能为空")));
+        }
         UserInfoEntity userParams = JsonUtil.string2Object(s, UserInfoEntity.class);
-        System.out.println(s);
+
         UserInfoEntity userInfoEntity = new UserInfoServiceImpl().userLogin(userParams.getPhone(), userParams.getPassword());
 
         if (userInfoEntity != null) {
             resp.getWriter().println(JsonUtil.object2String(ResultVO.success(userInfoEntity, "登陆成功")));
         } else {
-            resp.getWriter().println(JsonUtil.object2String(ResultVO.error(400,"登陆失败，请确保帐号或密码没有输错")));
+            resp.getWriter().println(JsonUtil.object2String(ResultVO.error(400, "登陆失败，请确保帐号或密码没有输错")));
         }
 
     }

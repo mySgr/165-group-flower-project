@@ -128,7 +128,7 @@
     }
 
     .blkuai {
-        border: 1px solid red;
+        /*border: 1px solid red;*/
         width: 1100px;
     }
 
@@ -144,6 +144,7 @@
     }
 
     .checkboxAll{
+        margin-top: 20px;
         position: absolute;
         left: 20px;
         top: 10px;
