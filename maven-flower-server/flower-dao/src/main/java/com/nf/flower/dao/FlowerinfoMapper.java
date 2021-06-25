@@ -8,6 +8,11 @@ import java.util.List;
 public interface FlowerinfoMapper {
     int addFlowerInfo(FlowerinfoEntity entity);
 
+    List<FlowerinfoEntity> hotFlowerInfo();
+
+    FlowerinfoEntity selectFlowerInfo(int flowerId);
+
+
     int updateFlowerStatus(@Param("id") int id, @Param("status") int status);
 
     int updateFlowerInfoById(FlowerinfoEntity entity);

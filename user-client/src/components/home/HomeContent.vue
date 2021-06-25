@@ -40,25 +40,29 @@
             </el-carousel>
 
             <h1>鲜花热销</h1>
+            <hr style="color: #666666">
             <div class="flowerInfo">
+                <el-card  v-for="i in flowerHotList" :key="i.flowerId" class="flower">
+                    <div @click="$router.push('/detailed/'+i.flowerId)">
+                        <img :src="i.coverSrc" class="cover">
+                        <div>
+                            标题: {{i.title}}
+                        </div>
+                        <div>
+                            价格: {{i.price}}
+                        </div>
 
-                <el-card v-for="i in flowerSelect" :key="i.flowerId" class="flower">
-                    <img :src=" 'http://169.254.173.71:9090/upload/'+i.cover" class="cover">
-                    <div>
-                        标题: {{i.title}}
-                    </div>
-                    <div>
-                        价格: {{i.price}}
+                        <div>price:99$</div>
                     </div>
 
-                    <div>price:99$</div>
                 </el-card>
 
             </div>
             <h1>新品上市</h1>
+            <hr style="color: #666666">
             <div class="flowerInfo">
                 <el-card v-for="i in flowerSelect" :key="i.flowerId" class="flower">
-                    <img :src=" 'http://169.254.173.71:9090/upload/'+i.cover" class="cover">
+                    <img :src=i.coverSrc class="cover">
                     <div>
                         标题: {{i.title}}
                     </div>
@@ -87,22 +91,31 @@
                     "https://img02.hua.com/zhuanti/graduation/2020/pc_banner.png"
                 ],
                 flowerSelect: [],
+                flowerHotList:[],
             }
         },
         created: function() {
             this.flowerGetAll()
+            this.flowerHotALl()
         },
         methods:{
             flowerGetAll(){
-
                 this.axios({
                     url:"/api/user/selectFlower",
                     method:"post",
                 }).then(r => {
                     this.flowerSelect = r.data;
-                    console.log(r);
                 })
             },
+            flowerHotALl(){
+                this.axios({
+                    url:"/api/flower/hot",
+                    method:"post",
+                }).then(hot=>{
+                    this.flowerHotList = hot.data.data;
+                })
+            },
+
 
         }
     }
@@ -152,6 +165,7 @@
     }
 
     .flowr-class span:hover {
+        cursor: pointer;
         color: #FB7299;
     }
 
@@ -165,7 +179,7 @@
     .flower {
         padding-left: 2px;
         margin: 5px;
-        width: 205px;
+        width: 200px;
         border: 1px solid #e6e6e6;
         height: 300px;
     }

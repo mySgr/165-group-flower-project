@@ -11,6 +11,8 @@ import Reply from '../components/message/Message'
 import UserInfoAvatar from "../components/user/UserInfoAvatar";
 import UserInfoFlowerSelect from "../components/user/UserInfoFlowerSelect"
 import UserInfoContact from "../components/user/UserInfoContact";
+import FlowerDetailed from "../components/flower/FlowerDetailed";
+import  FlowerShopping from  "../components/flower/FlowerShopping"
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,7 +40,9 @@ const routes = [
             {path: '/login', component: Userloign},
             {path: '/logon', component: UserInfologon},
             {path: '/flowersSelect/:name', component:UserInfoFlowerSelect},
+            {path: '/detailed/:id',component: FlowerDetailed},
             {path: '/customer-service', component:UserInfoContact},
+            {path: '/flower-shopping',component: FlowerShopping}
         ]
     }
 ]

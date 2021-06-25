@@ -36,7 +36,7 @@
     <mappers>
         <mapper resource="dao/userinfo-mapper.xml"/>
         <mapper resource="dao/user-role-mapper.xml"/>
-
+        <mapper resource="dao/order/order-cart.xml"/>
         <mapper resource="dao/commodity/flowerinfo-mapper.xml"/>
         <mapper resource="dao/commodity/flower-picture-mapper.xml"/>
         <mapper resource="dao/commodity/flower-purpose-mapper.xml"/>
