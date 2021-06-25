@@ -12,6 +12,7 @@ import UserInfoAvatar from "../components/user/UserInfoAvatar";
 import UserInfoFlowerSelect from "../components/user/UserInfoFlowerSelect"
 import UserInfoContact from "../components/user/UserInfoContact";
 import FlowerDetailed from "../components/flower/FlowerDetailed";
+import  FlowerShopping from  "../components/flower/FlowerShopping"
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +42,7 @@ const routes = [
             {path: '/flowersSelect/:name', component:UserInfoFlowerSelect},
             {path: '/detailed/:id',component: FlowerDetailed},
             {path: '/customer-service', component:UserInfoContact},
+            {path: '/flower-shopping',component: FlowerShopping}
         ]
     }
 ]

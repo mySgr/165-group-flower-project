@@ -113,6 +113,23 @@ SELECT * FROM FLOWER_picture
 DROP TABLE flower_picture
 DROP TABLE user_member
 
+CREATE TABLE order_cart(
+  cart_id INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '购物车ID',
+  user_id INT UNSIGNED NOT NULL COMMENT '用户ID',
+  flower_id INT UNSIGNED NOT NULL COMMENT '商品ID',
+  product_amount INT NOT NULL COMMENT '加入购物车商品数量',
+  price DECIMAL(8,2) NOT NULL COMMENT '商品价格',
+  add_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入购物车时间',
+  PRIMARY KEY(cart_id)
+) ENGINE = INNODB COMMENT '购物车表';
+INSERT INTO order_cart(user_id,flower_id,product_amount,price) VALUES(10001,1,1,100)
+
+SELECT  title ,cover,order_cart.product_amount,price FROM order_cart
+ LEFT JOIN  user_info ON  user_info.user_id = order_cart.user_id 
+ LEFT JOIN flower_info C ON  c.flower_id = order_cart.cart_id
+
+
+
 SELECT * FROM user_role
 
         SELECT

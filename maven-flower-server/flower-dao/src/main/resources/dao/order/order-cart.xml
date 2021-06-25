@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.flower.dao.ShopingMapper">
+    <!--    点击购物车之后显示花的信息-->
+    <resultMap id="flowerinfoAndCartInfo" type="FLowerInfoSelectShoppingEntity" autoMapping="true">
+        <association property="userInfoEntity" autoMapping="true">
+            <id property="userId" column="user_id"></id>
+        </association>
+        <association property="flowerinfoEntity" autoMapping="true">
+            <id property="flowerId" column="flower_id"></id>
+        </association>
+    </resultMap>
+    <select id="selectShopping" resultMap="flowerinfoAndCartInfo">
+        SELECT user_info.user_id,C.flower_id, title ,cover,
+        order_cart.product_amount,order_cart.price,order_cart.price,order_cart.cart_id
+        FROM order_cart
+        LEFT JOIN user_info ON user_info.user_id = order_cart.user_id
+        LEFT JOIN flower_info C ON c.flower_id = order_cart.flower_id
+        <where>
+            user_info.user_id = #{userId}
+        </where>
+    </select>
+    <!--    添加到购物车-->
+    <insert id="addShopping">
+        INSERT INTO order_cart(user_id,flower_id,product_amount,price)
+        VALUES(#{userId},#{flowerID},#{productAmount},#{price})
+    </insert>
+    <delete id="deleteFlower">
+        DELETE FROM order_cart WHERE cart_id=#{cartId};
+    </delete>
+</mapper>
+

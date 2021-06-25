@@ -9,7 +9,7 @@
 
         >
             <!--  导航栏菜单项  -->
-            <el-menu-item><img width="90" src="../assets/image/logo.png"></el-menu-item>
+            <el-menu-item index="/"><img width="90" src="../assets/image/logo.png" ></el-menu-item>
             <el-menu-item index="/index">首页</el-menu-item>
             <el-menu-item index="/class">分类</el-menu-item>
             <el-menu-item index="/class">花语大全</el-menu-item>
@@ -39,11 +39,12 @@
             </el-submenu>
             <el-menu-item v-else index="/login" style="float: right">login</el-menu-item>
             <el-menu-item index="/reply" style="float: right">消息中心</el-menu-item>
-            <el-menu-item index="/cart" style="float: right">购物车</el-menu-item>
+            <el-menu-item index="/flower-shopping" style="float: right">购物车</el-menu-item>
             <el-menu-item index="#" style="float: right">店铺会员</el-menu-item>
             <el-menu-item style="float: right">
-                <el-input placeholder="商品搜索" v-model="flower">
-                    <el-button slot="append" icon="el-icon-search" @click="$router.push('/flowersSelect/' +flower)" ></el-button>
+                <el-input placeholder="商品搜索" v-model="flower" @keyup.enter.native="$router.push('/flowersSelect/' +flower)">
+                    <el-button slot="append" icon="el-icon-search"
+                               @click="$router.push('/flowersSelect/' +flower)" ></el-button>
                 </el-input>
             </el-menu-item>
         </el-menu>

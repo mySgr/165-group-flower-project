@@ -19,7 +19,9 @@
     </select>
 <!--   根据id查询详细的花朵信息 -->
     <select id="selectFlowerInfo" resultType="FlowerinfoEntity">
-        select title,price,material,flower_language,details,buy_Count,cover from flower_info
+        select   flower_id,title,price,material,flower_language,details,buy_Count,cover from flower_info
         where flower_id = #{flowerid}
     </select>
+
+
 </mapper>

@@ -21,7 +21,7 @@
 
 
 </template>
-<style>
+<style scoped>
     #shiping{
         width: 400px;
         height: 300px;

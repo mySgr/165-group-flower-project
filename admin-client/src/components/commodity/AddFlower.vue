@@ -188,7 +188,7 @@
                             }
                             this.$message.success(result.data.message)
                             // 清空数据
-                            this.flowerinfo = {price: 0, stock: 0, status: 0}
+                            this.flowerinfo = {price: 0, stock: 0, status: 2}
                             this.imageUrl = ''
                             this.status = false
 

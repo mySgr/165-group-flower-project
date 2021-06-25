@@ -165,6 +165,7 @@
     }
 
     .flowr-class span:hover {
+        cursor: pointer;
         color: #FB7299;
     }
 
