@@ -11,7 +11,7 @@
         #{purposeId},#{warehouseId})
     </insert>
 
-<<<<<<< HEAD
+
 <!--分页查询，根据热傍来查询销量最高的五条数据进行分组-->
     <select id="hotFlowerInfo" resultType="FlowerinfoEntity">
         SELECT flower_id,title,price,buy_count,STATUS ,cover FROM flower_info
@@ -24,7 +24,7 @@
         where flower_id = #{flowerid}
     </select>
 
-=======
+
     <!--    修改鲜花状态-->
     <update id="updateFlowerStatus">
         update flower_info set status = #{status}
@@ -67,6 +67,5 @@
         from flower_info where  flower_id = #{flowerId}
 
     </select>
->>>>>>> upstream/master
 
 </mapper>

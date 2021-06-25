@@ -147,11 +147,7 @@
                 })
             },
             // 上下架
-<<<<<<< HEAD
-            flowerStatusChange(val) {
-=======
             flowerStatusChange() {
->>>>>>> upstream/master
                 this.flowerinfo.status = this.status ? 1 : 2
             },
             //封面图发生改变时

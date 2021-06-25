@@ -6,11 +6,6 @@ import com.nf.flower.dao.FlowerinfoMapper;
 import com.nf.flower.entity.commodity.FlowerinfoEntity;
 import com.nf.flower.util.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
-
-<<<<<<< HEAD
-import java.security.PublicKey;
-=======
->>>>>>> upstream/master
 import java.util.List;
 
 public class FlowerInfoServiceImpl {
@@ -42,11 +37,6 @@ public class FlowerInfoServiceImpl {
             FlowerinfoMapper mapper=sqlSession.getMapper(FlowerinfoMapper.class);
           return  mapper.selectFlowerInfo(flowerId);
         }
-    }
-
-    public static void main(String[] args) {
-        FlowerInfoServiceImpl flowerInfoService=new FlowerInfoServiceImpl();
-        flowerInfoService.selectFlowerInfo(5);
     }
 
     public int updateFlowerStatus(int id, int status) {

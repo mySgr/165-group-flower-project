@@ -43,15 +43,9 @@
             <el-menu-item index="/flower-shopping" style="float: right">购物车</el-menu-item>
             <el-menu-item index="#" style="float: right">店铺会员</el-menu-item>
             <el-menu-item style="float: right">
-<<<<<<< HEAD
                 <el-input placeholder="商品搜索" v-model="flower" @keyup.enter.native="$router.push('/flowersSelect/' +flower)">
                     <el-button slot="append" icon="el-icon-search"
                                @click="$router.push('/flowersSelect/' +flower)" ></el-button>
-=======
-                <el-input placeholder="商品搜索" v-model="flower">
-                    <el-button slot="append" icon="el-icon-search"
-                               @click="$router.push('/flowersSelect/' +flower)"></el-button>
->>>>>>> upstream/master
                 </el-input>
             </el-menu-item>
         </el-menu>
