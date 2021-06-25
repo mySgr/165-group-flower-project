@@ -1,17 +1,21 @@
 package com.nf.flower.entity.commodity;
 
+import com.nf.flower.tools.Common;
+
 /**
- *  鲜花图片
- *CREATE TABLE flower_picture(
-         *picture_id INT PRIMARY KEY AUTO_INCREMENT,    #鲜花图片编号
-         *flower_id INT,                            #鲜花编号
-         *img_url VARCHAR(128)                    #图片路径
-         *);
+ * 鲜花图片
+ * CREATE TABLE flower_picture(
+ * picture_id INT PRIMARY KEY AUTO_INCREMENT,    #鲜花图片编号
+ * flower_id INT,                            #鲜花编号
+ * img_url VARCHAR(128)                    #图片路径
+ * );
  */
 public class FlowerPictureEntity {
     private Integer pictureId;
     private Integer FlowerId;
     private String imgUrl;
+    private String pictureSrc;
+
 
     private FlowerinfoEntity flowerEntity;
 
@@ -37,6 +41,10 @@ public class FlowerPictureEntity {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getPictureSrc() {
+        return Common.IP_ADDRESS + this.imgUrl;
     }
 
     public FlowerinfoEntity getFlowerEntity() {

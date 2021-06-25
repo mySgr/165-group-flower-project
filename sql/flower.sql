@@ -72,6 +72,7 @@ CREATE TABLE flower_purpose(
 	PRIMARY KEY(purpose_id)
 )
 INSERT INTO flower_purpose(purpose_name) VALUES('生日祝福')
+INSERT INTO flower_purpose(purpose_name) VALUES('爱情鲜花')
 
 /**鲜花表**/
 CREATE TABLE flower_info(
@@ -98,7 +99,8 @@ CREATE TABLE flower_info(
   warehouse_id INT COMMENT'仓库编号',
   PRIMARY KEY(flower_id)
   )		
-     
+    
+
 SELECT * FROM flower_info
 DELETE FROM flower_info
 

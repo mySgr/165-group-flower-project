@@ -32,6 +32,7 @@ public class UploadFlowerPictureServlet extends MyHttpServlet {
         // 保存数据
         // 将图片存储到 hfs
         if (picture.getSubmittedFileName() != null) {
+
             // 保存图片的名字
             String saveName = "flower/" + UUID.randomUUID() + "_" + picture.getSubmittedFileName();
             //必须指定文件名
@@ -39,7 +40,7 @@ public class UploadFlowerPictureServlet extends MyHttpServlet {
 
             Map<String, Object> map = new HashMap<>();
             map.put("myfile", inputStreamResource);
-            HttpUtil.post(Common.IP_ADDRESS +"flower/", map);
+            HttpUtil.post(Common.IP_ADDRESS + "flower/", map);
 
             // 添加数据库记录
             FlowerPictureEntity entity = new FlowerPictureEntity();

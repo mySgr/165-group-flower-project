@@ -1,9 +1,9 @@
 <template>
-    <div class="addflower">
+    <div class="edit-flower">
         <el-breadcrumb separator="/">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-            <el-breadcrumb-item>添加商品</el-breadcrumb-item>
+            <el-breadcrumb-item>编辑商品</el-breadcrumb-item>
         </el-breadcrumb>
 
         <el-card class="box-card">
@@ -75,7 +75,7 @@
                 <el-form-item label="详细图片：">
                     <div class="pictureInfo">
                         <div class="picture" v-for="(item,index) in picturepreviews" :key="index">
-                            <img :src="item" class="cover">
+                            <img :src="item.pictureSrc" class="cover">
                         </div>
                         <div @click="$refs.pictureInfo.click()" class="upload">
                             <i class="el-icon-plus avatar-uploader-icon"></i>
@@ -92,7 +92,7 @@
                 </el-form-item>
             </el-form>
             <div style="text-align: center">
-                <el-button type="primary" @click="addFflowerinfo">添加</el-button>
+                <el-button type="primary" @click="editFflowerinfo">编辑</el-button>
                 <el-button @click="$router.push('/flower/list')">取消</el-button>
             </div>
         </el-card>
@@ -104,11 +104,12 @@
     export default {
         data() {
             return {
+                flowerId: null,
                 pictures: [],
                 picturepreviews: [],
                 imageUrl: '',
                 warehouses: [],  // 仓库列表
-                flowerPurpose: [],
+                flowerPurpose: [], // 鲜花用途
                 flowerinfo: {price: 0, stock: 0, status: 2},
                 status: false,
                 flowerinfoRules: {
@@ -122,6 +123,17 @@
             }
         },
         methods: {
+            // 加载 详细图片
+            loadFlowerPicture() {
+                this.$axios({
+                    url: '/api/flower/picture/list',
+                    params: {flowerId: this.flowerId}
+                }).then(resp => {
+                    if (resp.data.code == 200) {
+                        this.picturepreviews = resp.data.data
+                    }
+                })
+            },
             // 加载 鲜花用途
             loadFlowerPurpose() {
                 this.$axios({
@@ -133,6 +145,22 @@
                         alert(result.data.message)
                     }
                 })
+            },
+            // 加载鲜花信息
+            loadFlowerInfo(flowerId) {
+                this.$axios({
+                    url: '/api/flower/info',
+                    params: {flowerId}
+                }).then(resp => {
+                    if (resp.data.code === 200) {
+                        this.flowerinfo = resp.data.data;
+                        this.imageUrl = this.flowerinfo.coverSrc
+                        this.status = this.flowerinfo.status === 1 ? true : false
+                    } else {
+                        alert(resp.data.message)
+                    }
+                })
+
             },
             // 加载仓库
             loadFlowerWarehouse() {
@@ -149,47 +177,55 @@
             // 上下架
             flowerStatusChange() {
                 this.flowerinfo.status = this.status ? 1 : 2
+
             },
             //封面图发生改变时
             inputFileChange() {
                 this.flowerinfo.cover = this.$refs.uploadRef.files[0]
                 this.imageUrl = URL.createObjectURL(this.$refs.uploadRef.files[0])  //创建一个虚拟路径,用来显示
 
-            },// 详情图片
+            },
+            // 详情图片
             // 图片预览
             flowerPictureChange() {
-                this.pictures.push(this.$refs.pictureInfo.files[0])
-                this.picturepreviews.push(URL.createObjectURL(this.$refs.pictureInfo.files[0]))
+                let bbb = {
+                    pictureSrc: URL.createObjectURL(this.$refs.pictureInfo.files[0])
+                }
+                this.picturepreviews.push(bbb)
             },
-            // 添加鲜花信息
-            addFflowerinfo() {
+            // 修改鲜花信息
+            editFflowerinfo() {
                 // 表单验证
                 this.$refs.flowerRef.validate(b => {
                     if (b == false) {
                         return this.$message.warning("必填项不能为空")
                     }
-                    // 验证通过，开始添加
+                    // 验证通过，开始修改
+                    // 上架、下架
+                    this.flowerinfo.status = this.status ? 1 : 2
                     let formData = new FormData();
-                    formData.append("cover", this.flowerinfo.cover)
-                    this.flowerinfo.cover = undefined
+                    if (this.$refs.uploadRef.files[0] !== undefined) {
+                        formData.append("cover", this.flowerinfo.cover)
+                        this.flowerinfo.cover = undefined
+                    }
                     formData.append("flowerinfo", JSON.stringify(this.flowerinfo))
 
                     this.$axios({
-                        url: '/api/flower/add',
+                        url: '/api/flower/info/edit',
                         method: 'post',
                         data: formData
                     }).then(result => {
                         if (result.data.code == 200) {
                             if (this.pictures.length > 0) {
                                 this.uploadPictures(result.data.data.flowerId)
+                                this.loadFlowerPurpose()
                             }
                             this.$message.success(result.data.message)
+                            // 刷新
+                            this.loadFlowerInfo(this.flowerId)
+                            this.loadFlowerPicture()
                             window.scrollTo(0, 0); // 滚动到顶部啊
-                            // 清空数据
-                            this.flowerinfo = {price: 0, stock: 0, status: 2}
-                            this.imageUrl = ''
-                            this.$refs.uploadRef.value = null
-                            this.status = false
+                            this.$refs.uploadRef.value = ''
 
                         } else {
                             alert(result.data.message)
@@ -221,8 +257,11 @@
 
         },
         created() {
+            this.flowerId = this.$route.params.flowerId
             this.loadFlowerPurpose()
             this.loadFlowerWarehouse()
+            this.loadFlowerPicture()
+            this.loadFlowerInfo(Number.parseInt(this.flowerId))
         }
     }
 </script>

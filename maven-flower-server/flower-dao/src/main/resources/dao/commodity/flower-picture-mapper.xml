@@ -6,4 +6,11 @@
     <insert id="addFlowerPicture">
         insert into flower_picture(flower_id,img_url) values(#{flowerId},#{imgUrl})
     </insert>
+
+
+<!--   根据 鲜花编号 来查询对应的编号信息-->
+    <select id="getFlowerPictureListByFlowerId" resultType="flowerPictureEntity">
+        select picture_id,flower_id,img_url from flower_picture
+        where flower_id = #{flowerId}
+    </select>
 </mapper>

@@ -7,11 +7,12 @@
                 mode="horizontal"
                 active-text-color="#FB7299"
 
+
         >
             <!--  导航栏菜单项  -->
             <el-menu-item><img width="90" src="../assets/image/logo.png"></el-menu-item>
             <el-menu-item index="/index">首页</el-menu-item>
-            <el-menu-item index="/class">分类</el-menu-item>
+            <el-menu-item index="/class" >分类</el-menu-item>
             <el-menu-item index="/class">花语大全</el-menu-item>
 
             <el-menu-item index="/customer-service">联系我们</el-menu-item>
@@ -43,13 +44,14 @@
             <el-menu-item index="#" style="float: right">店铺会员</el-menu-item>
             <el-menu-item style="float: right">
                 <el-input placeholder="商品搜索" v-model="flower">
-                    <el-button slot="append" icon="el-icon-search" @click="$router.push('/flowersSelect/' +flower)" ></el-button>
+                    <el-button slot="append" icon="el-icon-search"
+                               @click="$router.push('/flowersSelect/' +flower)"></el-button>
                 </el-input>
             </el-menu-item>
         </el-menu>
 
         <!--  路由 -->
-        <div id="body" >
+        <div id="body">
             <router-view></router-view>
         </div>
     </div>
@@ -60,7 +62,7 @@
     export default {
         data() {
             return {
-                flower:"",
+                flower: "",
                 user: {}
 
             };
@@ -90,7 +92,7 @@
         created() {
             this.user = JSON.parse(window.sessionStorage.getItem("user"))
             if (this.user != undefined || this.user != null) {
-                 this.user.avatarSrc=' http://172.16.1.152:9090/upload/4.png'
+                this.user.avatarSrc = ' http://172.16.1.152:9090/upload/4.png'
                 this.userLoad()
             }
 
@@ -102,6 +104,11 @@
     #body {
         margin: 0% auto;
         width: 80%;
+    }
+
+    .el-menu-item:hover {
+        color: #fa4b8b!important;
+
     }
 
 </style>
