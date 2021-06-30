@@ -2,7 +2,7 @@
 
     <div class="zhuti">
         <span class="zi">
-            <span ><input type="checkbox"/> 全选</span>
+            <span><input @change="checkAllCartItemChange" v-model="checked" type="checkbox"/> 全选</span>
                 <span>样品图</span>
                 <span>商品名称</span>
                 <span>价格</span>
@@ -11,28 +11,29 @@
                 <span>操作</span>
         </span>
 
-        <div class="blkuai" v-for="(item,index) in shopping" :key="index">
-
+        <div class="blkuai" v-for="(item,index) in cart.list" :key="index">
             <div class="bianlikuai">
-                <input type="checkbox"  class="checkboxAll">
-                <img :src="item.flowerinfoEntity.coverSrc" class="tp">
-                <span class="name">{{item.flowerinfoEntity.title}}</span>
-                <span class="jiage">{{item.price}}</span>
+                <input type="checkbox" @change="cartStatusChange(item)" :checked="item.cartStatus===1?true:false"
+                       class="checkboxAll">
+                <img :src="item.flower.coverSrc" class="tp">
+                <span class="name">{{item.flower.title}}</span>
+                <span class="jiage">{{item.flower.price}}</span>
 
                 <el-input-number class="shu"
                                  :min="1" :max="10"
                                  label="描述文字"
                                  size="small"
-                                 v-model="item.productAmount" @change="handleChange(item.cartId)">
+                                 v-model="item.cartCount" @change="handleChange(item)">
                 </el-input-number>
-                <span class="xiaoji">{{item.subtotal}}</span>
+                <span class="xiaoji">{{item.cartPrice}}</span>
                 <button class="an" @click="deleteShopping(item.cartId)">删除
                 </button>
 
             </div>
-
         </div>
-        <span class="zongji">总计:{{total}}</span>
+
+
+        <span class="zongji">总计:{{cart.totalPrice==null?0:cart.totalPrice}}</span>
 
     </div>
 
@@ -42,14 +43,28 @@
     export default {
         data() {
             return {
+                checked: false,
                 total: 0,
                 user: {},
                 shopping: [],
                 num: 1,
+                cart: {}
 
             }
         },
         methods: {
+            // 全选
+            checkAllCartItemChange() {
+                console.log(this.checked)
+                let status = this.checked ? 1 : 0
+                this.$axios({
+                    url: '/api/cart/status/all',
+                    params: {status:status, userId:this.user.userId}
+                }).then(r => {
+                    this.queryCart()
+                    console.log(r)
+                })
+            },
             deleteShopping(cartId) {
                 this.axios({
                     url: "/api/delete/shopping?cartId=" + cartId,
@@ -59,49 +74,61 @@
                     this.selectFlowerShooping();
                 })
             },
-// 小计
-            show(price, count) {
-                if (!price) {
-                    return ''
-                }
-                return
-            },
-            // 总计
-            showTotal() {
 
-                this.shopping.forEach(r => {
-                    r.subtotal = r.price * r.productAmount
-                    this.total += r.subtotal
-
-                })
-            },
-            selectFlowerShooping() {
+            // 查询购物车信息
+            queryCart() {
                 this.user = JSON.parse(window.sessionStorage.getItem("user"));
                 this.axios({
-                    url: "/api/shopping/flower",
+                    url: "/api/cart/list",
                     method: "post",
                     params: {userId: this.user.userId}
                 }).then(s => {
-                    this.shopping = s.data.data;
-                    this.shopping.forEach(r => {
-                        r.subtotal = r.price * r.productAmount
-                        this.total += r.subtotal
-                    })
-                })
-            },
-            handleChange(value) {
-                console.log(value)
-                this.shopping.forEach(r => {
-                    r.subtotal = r.price * r.productAmount
-                    if (r.cartId === value)
-                        this.total += r.price * r.productAmount
-                })
+                    console.log(s)
+                    this.cart = s.data.data;
+                    console.log(this.cart)
 
+                })
             },
+            // 购物项里的数量发生改变时，执行访方法
+            handleChange(item) {
+                this.user = JSON.parse(window.sessionStorage.getItem("user"));
+                this.axios({
+                    url: "/api/cart/reckon",
+                    params: {
+                        userId: this.user.userId,
+                        cartListId: item.cartListId,
+                        price: item.flower.price,
+                        count: item.cartCount
+                    }
+                }).then(r => {
+                    if (r.data.code === 200) {
+                        this.queryCart()
+                    } else {
+                        console.log(r.data.message)
+                        alert(r.data.message)
+                    }
+
+                })
+            },
+            // 更新购物车状态
+            cartStatusChange(item) {
+                let status = item.cartStatus === 1 ? 0 : 1
+                this.$axios({
+                    url: '/api/cart/status/update',
+                    params: {status: status, id: item.cartListId, userId: this.user.userId}
+                }).then(r => {
+                    if (r.data.code === 200) {
+                        this.queryCart()
+                    } else {
+                        alert(r.data.message)
+                    }
+                })
+            }
         },
 
         created() {
-            this.selectFlowerShooping();
+            this.user = JSON.parse(window.sessionStorage.getItem("user"));
+            this.queryCart()
         }
     }
 
@@ -143,7 +170,7 @@
         border-radius: 10px;
     }
 
-    .checkboxAll{
+    .checkboxAll {
         margin-top: 20px;
         position: absolute;
         left: 20px;
@@ -151,6 +178,7 @@
         width: 50px;
         height: 50px;
     }
+
     .tp {
         position: absolute;
         left: 160px;

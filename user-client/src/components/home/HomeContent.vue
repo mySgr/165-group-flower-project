@@ -1,7 +1,5 @@
 <template>
     <div class="content">
-
-
         <div class="carouserl">
             <el-carousel height="305px" direction="vertical">
                 <el-carousel-item v-for="item in dataImage" :key="item">
@@ -39,42 +37,59 @@
                 </div>
             </el-carousel>
 
-            <h1>鲜花热销</h1>
-            <hr style="color: #666666">
+
+            <span style="font-size: 24px;"  class="title"><b>鲜花热销</b></span>
+            <span style="font-size: 22px">  · 你值得拥有</span>
+            <hr style="color: #666666;" >
             <div class="flowerInfo">
                 <el-card  v-for="i in flowerHotList" :key="i.flowerId" class="flower">
-                    <div @click="$router.push('/detailed/'+i.flowerId)">
+                    <div @click="$router.push('/detailed/'+i.flowerId)" class="allClass">
                         <img :src="i.coverSrc" class="cover">
-                        <div>
-                            标题: {{i.title}}
-                        </div>
-                        <div>
-                            价格: {{i.price}}
+                        <div class="allClass">
+                            <div class="title">
+                                <span >{{i.title}}</span>
+                            </div>
+                            <div class="title">
+                                <span>价格: {{i.price}}</span>
+                            </div>
                         </div>
 
-                        <div>price:99$</div>
                     </div>
 
                 </el-card>
 
             </div>
-            <h1>新品上市</h1>
-            <hr style="color: #666666">
-            <div class="flowerInfo">
-                <el-card v-for="i in flowerSelect" :key="i.flowerId" class="flower">
-                    <img :src=i.coverSrc class="cover">
-                    <div>
-                        标题: {{i.title}}
-                    </div>
-                    <div>
-                        价格: {{i.price}}
-                    </div>
+            <span style="font-size: 24px;"  class="title"><b>新品上市</b></span>
+            <span style="font-size: 22px">  · 你值得查看</span>
+            <hr style="color: #666666;margin-bottom:10px " >
+            <div id="xinpin">
+                <div class="newTp">
+                    <img style="width: 230px;height: 560px" src="http://169.254.173.71:9090/upload/flower/111.png">
+                </div>
+                <div class="Tp-right">
 
-                    <div>price:99$</div>
-                </el-card>
+                    <el-card id="newxinpin" v-for="i in flowerSelect" :key="i.flowerId" >
+
+                        <img :src=i.coverSrc class="cover">
+                        <div class="allClass">
+                            <div class="title">
+                                     {{i.title}}
+                            </div>
+                            <div  class="title">
+                                价格: {{i.price}}
+                            </div>
+
+                        </div>
+
+                    </el-card>
+
+
+                </div>
+
             </div>
 
         </div>
+
 
     </div>
 
@@ -174,7 +189,6 @@
     .flowerInfo {
         display: flex;
         flex-wrap: wrap;
-
     }
     .flower {
         padding-left: 2px;
@@ -183,11 +197,56 @@
         border: 1px solid #e6e6e6;
         height: 300px;
     }
+    .allClass{
+        margin-top: 5px;
+    }
     .cover{
         margin-right: 10px;
         width: 170px;
         height: 170px;
     }
+    .cover:hover{
+        transform: scale(1.1)
+    }
+    .cover  {
+        cursor: pointer;
+        transition: all 0.5s;
+    }
+    .title > span:hover{
+        color: pink;
+    }
+    .title:hover{
+        color: pink;
+    }
 
+    /*新品上市*/
+    #xinpin {
+        /*border: 1px solid red;*/
+        height: 640px;
+    }
+
+    .newTp{
+        margin-top: 4px;
+        width: 230px;
+        height: 560px;
+        /*border: solid 1px red;*/
+        position: relative;
+        float: left;
+    }
+    .Tp-right{
+
+        width:1100px ;
+        height: 600px;
+        /*border: solid 1px yellow;*/
+    }
+
+
+    #newxinpin{
+        float: left;
+        /*border: 1px solid red;*/
+        width: 200px;
+        height: 275px;
+        margin: 3px ;
+    }
 
 </style>
