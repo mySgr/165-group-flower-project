@@ -28,7 +28,7 @@
         VALUES(#{userId},#{flowerID},#{productAmount},#{price})CartItem
     </insert>
     <delete id="deleteFlower">
-        DELETE FROM order_cart WHERE cart_id=#{cartId};
+        DELETE FROM cart_list WHERE cart_list_id=#{cartId};
     </delete>
 
     <!--    修改购物数量-->

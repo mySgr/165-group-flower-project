@@ -4,7 +4,7 @@
     <div class="flowerInfo">
 
         <div class="flowerLeft">
-            <img :src=" detailed.coverSrc">
+            <img :src=" detailed.coverSrc" width="200px" height="220px">
         </div>
 
         <div class="flowerRight">
@@ -16,7 +16,7 @@
             <span class="blockStyle"> 已售数量:{{detailed.buyCount}}</span>
 
 
-            <el-button  disabled v-if="isCart" class="el-icon-shopping-cart-2" round>
+            <el-button disabled v-if="isCart" class="el-icon-shopping-cart-2" round>
                 已加入购物车
             </el-button>
             <el-button type="danger" v-else class="el-icon-shopping-cart-2" round @click="addFlowerCart">
@@ -32,13 +32,15 @@
     .flowerInfo {
         margin: auto;
         width: 1100px;
-        height: 300px;
-        border: solid 1px red;
+        height: 220px;
         display: flex;
+        background: papayawhip;
+        box-shadow: 1px 1px 6px peachpuff;
 
     }
 
     .flowerLeft {
+
 
     }
 
@@ -102,18 +104,20 @@
             // 查询是否已在加入购物车
             queryIsCart() {
                 this.user = JSON.parse(window.sessionStorage.getItem("user"))
-                this.$axios({
-                    url: '/api/cart/item/exist',
-                    params: {flowerId: this.flowerId, userId: this.user.userId}
-                }).then(result => {
-                    this.isCart = result.data.data
-                    console.log(result)
-                })
+                if (this.user == null || this.user == undefined) return
+                    this.$axios({
+                        url: '/api/cart/item/exist',
+                        params: {flowerId: this.flowerId, userId: this.user.userId}
+                    }).then(result => {
+                        this.isCart = result.data.data
+                        console.log(result)
+                    })
             }
 
         },
         created() {
             this.flowerId = this.$route.params['id'];
+
             this.queryIsCart()
             this.flowerDefault()
         }

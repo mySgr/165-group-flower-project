@@ -47,50 +47,94 @@
                         <img :src="i.coverSrc" class="cover">
                         <div class="allClass">
                             <div class="title">
-                                <span >{{i.title}}</span>
+                                <span >
+                                      <i class="el-icon-shopping-cart-2"></i> {{i.title}}
+                                </span>
                             </div>
                             <div class="title">
-                                <span>价格: {{i.price}}</span>
+                                <span>￥: {{i.price}}</span>
                             </div>
                         </div>
-
                     </div>
-
                 </el-card>
 
             </div>
             <span style="font-size: 24px;"  class="title"><b>新品上市</b></span>
             <span style="font-size: 22px">  · 你值得查看</span>
             <hr style="color: #666666;margin-bottom:10px " >
-            <div id="xinpin">
+            <div id="xinpin" >
                 <div class="newTp">
                     <img style="width: 230px;height: 560px" src="http://169.254.173.71:9090/upload/flower/111.png">
                 </div>
-                <div class="Tp-right">
+                <div class="Tp-right" >
+                    <el-card id="newxinpin" v-for="i in flowerSelect" :key="i.flowerId"  >
+                        <img :src=i.coverSrc class="cover" @click="$router.push('/detailed/'+i.flowerId)">
 
-                    <el-card id="newxinpin" v-for="i in flowerSelect" :key="i.flowerId" >
-
-                        <img :src=i.coverSrc class="cover">
                         <div class="allClass">
                             <div class="title">
+                              <i class="el-icon-shopping-cart-2"></i>
                                      {{i.title}}
                             </div>
                             <div  class="title">
-                                价格: {{i.price}}
+                                ￥: {{i.price}}
                             </div>
-
                         </div>
-
                     </el-card>
-
-
                 </div>
 
-            </div>
 
+                <span style="font-size: 24px;"  class="title"><b>热门推荐</b></span>
+                <hr style="color: #666666;margin-bottom:10px "/>
+                <div id="d-bottom">
+                    <div class="d-left">
+                        <ul>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                        </ul>
+                    </div>
+                    <div class="d-left">
+                        <ul>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                        </ul>
+                    </div>
+                    <div class="d-left">
+                        <ul>
+                            <li><a href="https://www.baidu.com/">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="https://www.baidu.com/">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                            <li><a href="#">黄圣依正式签约担任品牌形象代言人</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">关于我们</a></li>
+
+                    </ul>
+                    <p>花店官方 版权所有 2000-20012 服务热线：0000000000 请与我们联系：163163163.com</p>
+                    <p class="copy">花会员互动群：12312313213本网实名:花店官网00000000000</p>
+                </div>
         </div>
 
-
+        </div>
     </div>
 
 
@@ -200,6 +244,11 @@
     .allClass{
         margin-top: 5px;
     }
+    .allClass:hover{
+        cursor: pointer;
+        color: #FB7299;
+
+    }
     .cover{
         margin-right: 10px;
         width: 170px;
@@ -247,6 +296,80 @@
         width: 200px;
         height: 275px;
         margin: 3px ;
+    }
+/*    热门资讯*/
+    #remen{
+        box-shadow: 1px 1px 6px #a7a79b;
+        border-radius: 10px;
+    }
+   #d-bottom{
+       width: 1060px;
+       height: 160px;
+       /*border: solid 1px red;*/
+       display: flex;
+       box-shadow: 1px 1px 6px #a7a79b;
+       border-radius: 10px;
+   }
+  .d-left{
+
+      margin-left: 80px;
+      padding: 5px;
+  }
+   .d-left a {
+    text-decoration:none;
+
+    }
+    .d-left a:hover{
+        background:pink;
+    }
+        .d-left ul{
+             list-style: lower-greek;
+    }
+    #list-button{
+        border: solid 1px red;
+        width: 1060px;
+        height: 300px;
+        background: white;
+        box-shadow: 1px 1px 6px #a7a79b;
+    }
+    /*页脚开始*/
+    .copyright {
+        background-color: rgba(102, 102, 102, 0.17);
+        /*border: 1px solid red;*/
+        margin-top: 10px;
+        height: 90px;
+    }
+
+    .copyright a:hover {
+        color: royalblue;
+    }
+
+    .copyright ul {
+        /*这里宽度我们不用970，因为ul的位置在居中，但是对齐的时候是竖直的我们把高度定短点*/
+        width: 700px;
+        height: 14px;
+        margin: 15px auto 13px;
+        list-style: none;
+    }
+
+    .copyright ul li {
+        height: 14px;
+        float: left;
+        /*定背景图片的位置*/
+        padding: 0 10px;
+
+        /*背景图右边显示，默认在左边*/
+    }
+
+    .copyright ul li a {
+        text-decoration: none;
+    }
+    .copyright p {
+        text-align: center;
+    }
+
+    .copyright .copy {
+        margin-top: 10px;
     }
 
 </style>
