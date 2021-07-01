@@ -37,28 +37,33 @@
                 </div>
             </el-carousel>
 
+            <div id="rexiao">
+                <div >
+                    <span style="font-size: 24px;"  class="title"><b>鲜花热销</b></span>
+                    <span style="font-size: 22px">  · 你值得拥有</span>
+                    <hr style="color: #666666;" >
+                </div>
 
-            <span style="font-size: 24px;"  class="title"><b>鲜花热销</b></span>
-            <span style="font-size: 22px">  · 你值得拥有</span>
-            <hr style="color: #666666;" >
-            <div class="flowerInfo">
-                <el-card  v-for="i in flowerHotList" :key="i.flowerId" class="flower">
-                    <div @click="$router.push('/detailed/'+i.flowerId)" class="allClass">
-                        <img :src="i.coverSrc" class="cover">
-                        <div class="allClass">
-                            <div class="title">
+                <div class="flowerInfo">
+                    <el-card  v-for="i in flowerHotList" :key="i.flowerId" class="flower">
+                        <div @click="$router.push('/detailed/'+i.flowerId)" class="allClass">
+                            <img :src="i.coverSrc" class="cover">
+                            <div class="allClass">
+                                <div class="title">
                                 <span >
                                       <i class="el-icon-shopping-cart-2"></i> {{i.title}}
                                 </span>
-                            </div>
-                            <div class="title">
-                                <span>￥: {{i.price}}</span>
+                                </div>
+                                <div class="title">
+                                    <span>￥: {{i.price}}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </el-card>
+                    </el-card>
 
-            </div>
+                </div>
+            </div >
+
             <span style="font-size: 24px;"  class="title"><b>新品上市</b></span>
             <span style="font-size: 22px">  · 你值得查看</span>
             <hr style="color: #666666;margin-bottom:10px " >
@@ -146,7 +151,7 @@
             return {
                 dataImage: ["https://img02.hua.com/zhuanti/birthday/pc/banner_lover.png",
                     "https://img02.hua.com/zhuanti/ertongjie/2020/pc_banner.jpg",
-                    "http://img.21xianhua.com/upload/2021/01/07/54ab24c633eddad34b5b790c1e09ba3b",
+
                     "https://img02.hua.com/zhuanti/graduation/2020/pc_banner.png"
                 ],
                 flowerSelect: [],
@@ -226,6 +231,9 @@
     .flowr-class span:hover {
         cursor: pointer;
         color: #FB7299;
+    }
+    #rexiao{
+        margin-top: 30px;
     }
 
 

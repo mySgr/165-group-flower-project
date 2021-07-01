@@ -146,14 +146,14 @@
     }
 
     .zi {
-        border: 1px solid red;
+        margin-top: 10px;
         font-size: 18px;
 
 
     }
     #quanxuan{
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         margin-left: 25px;
     }
     .yang{
