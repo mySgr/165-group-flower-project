@@ -30,7 +30,5 @@ public interface UserInfoMapper {
      List<FlowerinfoEntity> userInfoSelect();
 
      //鲜花查询
-    // List<FlowerinfoEntity> userInfoSelectFlowers();
-
     List<FlowerinfoEntity> selectFlowerLikenameAndprice(@Param("param") String param);
 }

@@ -34,7 +34,7 @@
             </if>
 
         </where>
-        order by created DESC
+        order by created DESC limit 8
     </select>
 
 
