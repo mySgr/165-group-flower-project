@@ -25,10 +25,81 @@
     <!--    添加到购物车-->
     <insert id="addShopping">
         INSERT INTO order_cart(user_id,flower_id,product_amount,price)
-        VALUES(#{userId},#{flowerID},#{productAmount},#{price})
+        VALUES(#{userId},#{flowerID},#{productAmount},#{price})CartItem
     </insert>
     <delete id="deleteFlower">
-        DELETE FROM order_cart WHERE cart_id=#{cartId};
+        DELETE FROM cart_list WHERE cart_list_id=#{cartId};
     </delete>
+
+    <!--    修改购物数量-->
+    <update id="updateCartById">
+        update order_cart
+        set title=#{title},cover=#{cover},material=#{material},
+        pack=#{pack},price=#{price},stock=#{stock},flower_language=#{flowerLanguage},
+        details=#{details},status=#{status},purpose_id=#{purposeId},
+        warehouse_id=#{warehouseId}
+        where flower_id = #{flowerId}
+    </update>
+
+
+    <!--    比较NB的购物车-->
+    <resultMap id="queryCartItem" type="CartItem" autoMapping="true">
+        <association property="flower" autoMapping="true">
+            <id column="flower_id" property="flowerId"></id>
+        </association>
+    </resultMap>
+
+    <select id="getCartByUserId" resultType="Cart">
+        SELECT cart_master_id,user_id
+        FROM cart_master
+        where user_id = #{userId}
+    </select>
+    <select id="getCartItemByCartMasterId" resultMap="queryCartItem">
+        SELECT cart_master_id,cart_list_id,flower_info.flower_id,
+        cart_price,cart_count,
+        title,price,cover,cart_status
+        FROM cart_list
+        left join flower_info on flower_info.flower_id = cart_list.flower_id
+        where cart_master_id = #{cartMasterId}
+    </select>
+    <!--    添加主购物车-->
+    <insert id="addCartMaster">
+        insert into cart_master(user_id) values(#{userId})
+    </insert>
+
+    <!--    添加购物项-->
+    <insert id="addCartItem">
+        insert into cart_list(cart_master_id,flower_id,cart_count,cart_price)
+        values(#{cartMasterId},#{flowerId},#{cartCount},#{cartPrice})
+    </insert>
+
+
+    <!--    更新购物车数据-->
+    <update id="updateCountAndCartPrice">
+        update cart_list set cart_count=#{cartCount},cart_price=#{cartPrice}
+        where cart_list_id = #{cartListId}
+    </update>
+
+    <!-- 复选框是否选中-->
+    <update id="updateCartStatus">
+        update cart_list set cart_status=#{status}
+        where cart_list_id = #{id}
+    </update>
+    <!--
+    这种方式最简单，就是用foreach组装成多条update语句，
+    但Mybatis映射文件中的sql语句默认是不支持以" ; " 结尾的，
+    也就是不支持多条sql语句的执行。所以需要在连接mysql的url上加
+    &allowMultiQueries=true 这个才可以执行。
+    -->
+    <update id="updateCartStatusAll">
+
+
+                UPDATE cart_list SET cart_status = #{status}
+                WHERE cart_list_id IN(
+                <foreach collection="list" item="i" separator=",">
+                    ${i.cartListId}
+                </foreach>
+                )
+    </update>
 </mapper>
 

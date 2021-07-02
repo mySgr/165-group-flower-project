@@ -72,35 +72,31 @@ CREATE TABLE flower_purpose(
 	PRIMARY KEY(purpose_id)
 )
 INSERT INTO flower_purpose(purpose_name) VALUES('生日祝福')
-INSERT INTO flower_purpose(purpose_name) VALUES('爱情鲜花')
 
 /**鲜花表**/
 CREATE TABLE flower_info(
   flower_id INT AUTO_INCREMENT COMMENT'鲜花编号' ,     
   title VARCHAR(32) COMMENT'鲜花标题', 
-  
   cover VARCHAR(128) COMMENT'封面图',
   material VARCHAR(60) COMMENT'材料',             
   pack  VARCHAR(60) COMMENT'包装',
-  
   price DECIMAL(10,2) COMMENT'销售价格',            
   stock INT COMMENT'库存',
   buy_Count INT DEFAULT 0 NOT NULL COMMENT'已售数量',
-
-   
+  
   flower_language  VARCHAR(40) COMMENT'花语',     
   details VARCHAR(60) COMMENT'产品说明',
                
   `status` INT COMMENT'鲜花状态，1 表示上架，2 表示下架',
   created DATETIME NOT NULL DEFAULT NOW() COMMENT'创建时间',
   
-
   purpose_id INT COMMENT '鲜花用途编号',
   warehouse_id INT COMMENT'仓库编号',
   PRIMARY KEY(flower_id)
-  )		
-    
-
+  )	
+  	
+DELETE FROM flower_info WHERE flower_id=9;
+ 
 SELECT * FROM flower_info
 DELETE FROM flower_info
 
@@ -124,11 +120,18 @@ CREATE TABLE order_cart(
   add_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入购物车时间',
   PRIMARY KEY(cart_id)
 ) ENGINE = INNODB COMMENT '购物车表';
+
+DELETE FROM order_cart WHERE cart_id=8;
+
+ INSERT INTO order_cart(user_id,flower_id,product_amount,price) VALUES(10001,11,2,100)
+SELECT * FROM  order_cart
+
 INSERT INTO order_cart(user_id,flower_id,product_amount,price) VALUES(10001,1,1,100)
 
-SELECT  title ,cover,order_cart.product_amount,price FROM order_cart
+SELECT  title ,cover,order_cart.product_amount,order_cart.price,user_name FROM order_cart
  LEFT JOIN  user_info ON  user_info.user_id = order_cart.user_id 
  LEFT JOIN flower_info C ON  c.flower_id = order_cart.cart_id
+ WHERE user_info.user_id = 10001
 
 
 -- 订单主表
@@ -173,7 +176,23 @@ CREATE TABLE user_address(
   address VARCHAR(128)      #详细地址
 );
 
+/*========    购物车  ===========*/
+CREATE TABLE cart_master
+(
+cart_master_id INT AUTO_INCREMENT  PRIMARY KEY COMMENT'购物车主表编号 ',
+user_id INT COMMENT'用户编号'
+)
 
+
+CREATE TABLE cart_list
+(
+ cart_list_id INT AUTO_INCREMENT PRIMARY KEY COMMENT '购物车列表 编号',
+ cart_master_id INT COMMENT '购物车主表编号',
+ flower_id INT COMMENT '鲜花编号',
+ cart_count INT COMMENT '购物车数量',
+ cart_price DECIMAL(10,2) COMMENT '购物车小计',
+ cart_status INT NOT NULL DEFAULT 1 COMMENT '当前状态，1 表示复选框选中，0表示未选中'
+)
 
 CREATE TABLE user_address(
   address_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -190,6 +209,9 @@ CREATE TABLE user_address(
 
 
 SELECT * FROM user_role
+
+
+UPDATE cart_list SET cart_status = 0 WHERE cart_list_id IN(2,1);
 
 
 -- 测试数据

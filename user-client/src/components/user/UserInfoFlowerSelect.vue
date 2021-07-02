@@ -2,15 +2,14 @@
     <div class="flowerInfo">
 
         <el-card v-for="i in flowers" :key="i.flowerId" class="flower">
-            <img :src=" 'http://169.254.173.71:9090/upload/'+i.cover" class="cover">
+            <img :src=" 'http://169.254.173.71:9090/upload/'+i.cover" class="cover" style="width: 200px;height: 200px">
             <div>
-                标题: {{i.title}}
+                介绍: {{i.title}}
             </div>
-            <div>price:99$</div>
-            <div class="block">
-                <span class="demonstration">默认不区分颜色</span>
-                <el-rate v-model="value1"></el-rate>
+            <div>
+                ￥{{i.price}}
             </div>
+
         </el-card>
 
     </div>

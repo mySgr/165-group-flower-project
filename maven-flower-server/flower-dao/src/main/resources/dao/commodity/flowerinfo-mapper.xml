@@ -41,6 +41,8 @@
     </update>
 
 
+
+
     <!--  鲜花信息和鲜花用途的结果集  -->
     <resultMap id="flowerinfoAndFlowerPurpose" type="FlowerinfoEntity" autoMapping="true">
         <id column="flower_id" property="flowerId"></id>
