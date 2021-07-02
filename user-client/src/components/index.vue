@@ -6,13 +6,11 @@
                 :default-active="$route.path"
                 mode="horizontal"
                 active-text-color="#FB7299"
-
-
         >
             <!--  导航栏菜单项  -->
-            <el-menu-item index="/"><img width="90" src="../assets/image/logo.png" ></el-menu-item>
+            <el-menu-item index="/"><img width="90" src="../assets/image/logo.png"></el-menu-item>
             <el-menu-item index="/index">首页</el-menu-item>
-            <el-menu-item index="/class" >分类</el-menu-item>
+            <el-menu-item index="/class">分类</el-menu-item>
             <el-menu-item index="/class">花语大全</el-menu-item>
 
             <el-menu-item index="/customer-service">帮助中心</el-menu-item>
@@ -43,9 +41,10 @@
             <el-menu-item index="/flower-shopping" style="float: right">购物车</el-menu-item>
             <el-menu-item index="#" style="float: right">店铺会员</el-menu-item>
             <el-menu-item style="float: right">
-                <el-input placeholder="商品搜索" v-model="flower" @keyup.enter.native="$router.push('/flowersSelect/' +flower)">
+                <el-input placeholder="商品搜索" v-model="flower"
+                          @keyup.enter.native="$router.push('/flowersSelect/' +flower)">
                     <el-button slot="append" icon="el-icon-search"
-                               @click="$router.push('/flowersSelect/' +flower)" ></el-button>
+                               @click="$router.push('/flowersSelect/' +flower)"></el-button>
                 </el-input>
             </el-menu-item>
         </el-menu>
@@ -54,19 +53,23 @@
         <div id="body">
             <router-view></router-view>
         </div>
+        <my-footer></my-footer>
     </div>
 </template>
 
 
 <script>
+    import MyFooter from '../components/Footer'
+
     export default {
+        components: {MyFooter},
         data() {
             return {
                 flower: "",
                 user: {}
-
             };
         },
+
         methods: {
             userLogout() {
                 window.sessionStorage.clear();
@@ -82,7 +85,6 @@
                 }).then(result => {
                     if (result.data.code == 200) {
                         this.user = result.data.data
-                        console.log(this.user)
                     }
                 })
             },
@@ -107,7 +109,7 @@
     }
 
     .el-menu-item:hover {
-        color: #fa4b8b!important;
+        color: #fa4b8b !important;
 
     }
 

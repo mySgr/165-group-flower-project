@@ -95,6 +95,8 @@
                 <el-button type="primary" @click="addFflowerinfo">添加</el-button>
                 <el-button @click="$router.push('/flower/list')">取消</el-button>
             </div>
+            <span class="aaa">{{aaa}}</span>
+            <el-button @click="xxx">点我</el-button>
         </el-card>
 
     </div>
@@ -104,6 +106,7 @@
     export default {
         data() {
             return {
+                aaa: 0,
                 pictures: [],
                 picturepreviews: [],
                 imageUrl: '',
@@ -122,6 +125,10 @@
             }
         },
         methods: {
+            xxx(){
+                console.log(this.aaa)
+            },
+
             // 加载 鲜花用途
             loadFlowerPurpose() {
                 this.$axios({

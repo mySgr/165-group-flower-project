@@ -131,17 +131,65 @@ SELECT  title ,cover,order_cart.product_amount,price FROM order_cart
  LEFT JOIN flower_info C ON  c.flower_id = order_cart.cart_id
 
 
+-- 订单主表
+CREATE TABLE order_master(
+  order_master_id INT  NOT NULL AUTO_INCREMENT COMMENT '订单主表ID',
+  payment_method INT NOT NULL COMMENT '支付方式：1支付宝，2微信',
+  
+  create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '下单时间',
+  pay_time DATETIME COMMENT '支付时间',
+  shipping_time DATETIME COMMENT '发货时间',
+  received_time DATETIME COMMENT '签收时间',
+  
+  order_status INT NOT NULL DEFAULT 0 COMMENT '订单状态: 1-等待付款  2-等待发货  3-运输中  4-已签收  5-已取消',
+  order_point INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单积分',
+  order_money  DECIMAL(8,2) COMMENT '订单总价',
+  
+  user_id INT  NOT NULL COMMENT '下单人ID',
+  member_id INT COMMENT '会员编号',
+  address_id INT COMMENT'收货人编号',
+  PRIMARY KEY (order_master_id)
+)
+
+-- 订单详情表
+CREATE TABLE order_detail
+(
+  order_detail_id INT AUTO_INCREMENT COMMENT '订单详情表ID',
+  order_master_id INT COMMENT '订单主表编号',
+  product_count INT NOT NULL DEFAULT 1 COMMENT '购买商品数量',
+  product_price DECIMAL(8,2) NOT NULL COMMENT '商品总价',
+  flower_id INT NOT NULL COMMENT '鲜花编号',
+
+  PRIMARY KEY(order_detail_id)
+)
+
+/**收货地址信息**/
+
+CREATE TABLE user_address(
+  address_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT,                    #用户编号
+  receiver VARCHAR(16),       #接收人姓名
+  phone VARCHAR(16),          #手机
+  address VARCHAR(128)      #详细地址
+);
+
+
+
+CREATE TABLE user_address(
+  address_id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT,                    #用户编号
+  receiver VARCHAR(16),       #接收人姓名
+  phone VARCHAR(16),          #手机
+  province VARCHAR(16),       #省
+  city VARCHAR(16),           #市
+  county VARCHAR(16),         #县
+  address VARCHAR(128)      #详细地址
+
+);
+
+
 
 SELECT * FROM user_role
-
-        SELECT
-        user_id,user_name,phone,avatar,birthdate,autograph,`status`,created,user_info.role_id roleId
-        FROM user_info
-        LEFT JOIN user_role ON user_info.role_id = user_role.role_id
-        
-             SELECT user_role.role_id,role_identity,user_name FROM user_role
-        LEFT JOIN user_info ON user_info.role_id=user_role.role_id
-
 
 
 -- 测试数据

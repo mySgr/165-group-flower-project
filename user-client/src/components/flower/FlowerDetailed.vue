@@ -18,6 +18,10 @@
             <el-button type="danger" class="el-icon-shopping-cart-2" round @click="addFlowerCart">
                 加入购物车
             </el-button>
+
+            <el-button type="warning" round @click="$router.push('/checkout/'+flowerId)">
+                立即购买
+            </el-button>
         </div>
 
     </div>

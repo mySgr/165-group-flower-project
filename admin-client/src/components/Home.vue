@@ -140,13 +140,6 @@
             },
         },
         created() {
-            this.$axios({
-                method: 'post',
-                url: '/api/user/login',
-                data: {phone: 110, password: 123123}
-            }).then(result => {
-                console.log(result)
-            })
         }
     }
 </script>

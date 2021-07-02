@@ -2,6 +2,7 @@
     <div id="app">
 
         <router-view></router-view>
+
     </div>
 </template>
 
@@ -9,26 +10,9 @@
     export default {
         name: "app",
         data() {
-            return {
-                user: {}
-            }
+            return {}
+        }
 
-        },
-        methods: {
-            test() {
-                this.$axios({
-                    method: 'post',
-                    url: '/api/user/login',
-                    data: {phone: 110, password: 123123}
-                }).then((result) => {
-                    this.user = result.data.data
-                })
-
-            },
-        },
-        created() {
-            this.test();
-        },
     };
 </script>
 
