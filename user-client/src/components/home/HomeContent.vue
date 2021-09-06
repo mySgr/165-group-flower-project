@@ -38,19 +38,19 @@
             </el-carousel>
 
             <div id="rexiao">
-                <div >
-                    <span style="font-size: 24px;"  class="title"><b>鲜花热销</b></span>
+                <div>
+                    <span style="font-size: 24px;" class="title"><b>鲜花热销</b></span>
                     <span style="font-size: 22px">  · 你值得拥有</span>
-                    <hr style="color: #666666;" >
+                    <hr style="color: #666666;">
                 </div>
 
                 <div class="flowerInfo">
-                    <el-card  v-for="i in flowerHotList" :key="i.flowerId" class="flower">
+                    <el-card v-for="i in flowerHotList" :key="i.flowerId" class="flower">
                         <div @click="$router.push('/detailed/'+i.flowerId)" class="allClass">
                             <img :src="i.coverSrc" class="cover">
                             <div class="allClass">
                                 <div class="title">
-                                <span >
+                                <span>
                                       <i class="el-icon-shopping-cart-2"></i> {{i.title}}
                                 </span>
                                 </div>
@@ -62,25 +62,25 @@
                     </el-card>
 
                 </div>
-            </div >
+            </div>
 
-            <span style="font-size: 24px;"  class="title"><b>新品上市</b></span>
+            <span style="font-size: 24px;" class="title"><b>新品上市</b></span>
             <span style="font-size: 22px">  · 你值得查看</span>
-            <hr style="color: #666666;margin-bottom:10px " >
-            <div id="xinpin" >
+            <hr style="color: #666666;margin-bottom:10px ">
+            <div id="xinpin">
                 <div class="newTp">
                     <img style="width: 230px;height: 560px" src="http://169.254.173.71:9090/upload/flower/111.png">
                 </div>
-                <div class="Tp-right" >
-                    <el-card id="newxinpin" v-for="i in flowerSelect" :key="i.flowerId"  >
+                <div class="Tp-right">
+                    <el-card id="newxinpin" v-for="i in flowerSelect" :key="i.flowerId">
                         <img :src=i.coverSrc class="cover" @click="$router.push('/detailed/'+i.flowerId)">
 
                         <div class="allClass">
                             <div class="title">
-                              <i class="el-icon-shopping-cart-2"></i>
-                                     {{i.title}}
+                                <i class="el-icon-shopping-cart-2"></i>
+                                {{i.title}}
                             </div>
-                            <div  class="title">
+                            <div class="title">
                                 ￥: {{i.price}}
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                 </div>
 
 
-                <span style="font-size: 24px;"  class="title"><b>热门推荐</b></span>
+                <span style="font-size: 24px;" class="title"><b>热门推荐</b></span>
                 <hr style="color: #666666;margin-bottom:10px "/>
                 <div id="d-bottom">
                     <div class="d-left">
@@ -134,10 +134,10 @@
                         <li><a href="#">关于我们</a></li>
 
                     </ul>
-                    <p>花店官方 版权所有 2000-20012 服务热线：0000000000 请与我们联系：163163163.com</p>
-                    <p class="copy">花会员互动群：12312313213本网实名:花店官网00000000000</p>
+
+                    <my-footer></my-footer>
                 </div>
-        </div>
+            </div>
 
         </div>
     </div>
@@ -146,7 +146,10 @@
 </template>
 
 <script>
+    import MyFooter from '../Footer'
+
     export default {
+        components: {MyFooter},
         data() {
             return {
                 dataImage: ["https://img02.hua.com/zhuanti/birthday/pc/banner_lover.png",
@@ -155,27 +158,28 @@
                     "https://img02.hua.com/zhuanti/graduation/2020/pc_banner.png"
                 ],
                 flowerSelect: [],
-                flowerHotList:[],
+                flowerHotList: [],
             }
         },
-        created: function() {
+        created: function () {
             this.flowerGetAll()
             this.flowerHotALl()
         },
-        methods:{
-            flowerGetAll(){
+        methods: {
+            flowerGetAll() {
                 this.axios({
-                    url:"/api/user/selectFlower",
-                    method:"post",
+                    url: "/api/user/selectFlower",
+                    method: "post",
                 }).then(r => {
                     this.flowerSelect = r.data;
                 })
             },
-            flowerHotALl(){
+            flowerHotALl() {
+
                 this.axios({
                     url:"/api/flower/hot",
-                    method:"post",
-                }).then(hot=>{
+                    method: "post",
+                }).then(hot => {
                     this.flowerHotList = hot.data.data;
                 })
             },
@@ -232,7 +236,8 @@
         cursor: pointer;
         color: #FB7299;
     }
-    #rexiao{
+
+    #rexiao {
         margin-top: 30px;
     }
 
@@ -242,6 +247,7 @@
         display: flex;
         flex-wrap: wrap;
     }
+
     .flower {
         padding-left: 2px;
         margin: 5px;
@@ -249,30 +255,37 @@
         border: 1px solid #e6e6e6;
         height: 300px;
     }
-    .allClass{
+
+    .allClass {
         margin-top: 5px;
     }
-    .allClass:hover{
+
+    .allClass:hover {
         cursor: pointer;
         color: #FB7299;
 
     }
-    .cover{
+
+    .cover {
         margin-right: 10px;
         width: 170px;
         height: 170px;
     }
-    .cover:hover{
+
+    .cover:hover {
         transform: scale(1.1)
     }
-    .cover  {
+
+    .cover {
         cursor: pointer;
         transition: all 0.5s;
     }
-    .title > span:hover{
+
+    .title > span:hover {
         color: pink;
     }
-    .title:hover{
+
+    .title:hover {
         color: pink;
     }
 
@@ -282,7 +295,7 @@
         height: 640px;
     }
 
-    .newTp{
+    .newTp {
         margin-top: 4px;
         width: 230px;
         height: 560px;
@@ -290,56 +303,65 @@
         position: relative;
         float: left;
     }
-    .Tp-right{
 
-        width:1100px ;
+    .Tp-right {
+
+        width: 1100px;
         height: 600px;
         /*border: solid 1px yellow;*/
     }
 
 
-    #newxinpin{
+    #newxinpin {
         float: left;
         /*border: 1px solid red;*/
         width: 200px;
         height: 275px;
-        margin: 3px ;
+        margin: 3px;
     }
-/*    热门资讯*/
-    #remen{
+
+    /*    热门资讯*/
+    #remen {
         box-shadow: 1px 1px 6px #a7a79b;
         border-radius: 10px;
     }
-   #d-bottom{
-       width: 1060px;
-       height: 160px;
-       /*border: solid 1px red;*/
-       display: flex;
-       box-shadow: 1px 1px 6px #a7a79b;
-       border-radius: 10px;
-   }
-  .d-left{
 
-      margin-left: 80px;
-      padding: 5px;
-  }
-   .d-left a {
-    text-decoration:none;
+    #d-bottom {
+        width: 1060px;
+        height: 160px;
+        /*border: solid 1px red;*/
+        display: flex;
+        box-shadow: 1px 1px 6px #a7a79b;
+        border-radius: 10px;
+    }
+
+    .d-left {
+
+        margin-left: 80px;
+        padding: 5px;
+    }
+
+    .d-left a {
+        text-decoration: none;
 
     }
-    .d-left a:hover{
-        background:pink;
+
+    .d-left a:hover {
+        background: pink;
     }
-        .d-left ul{
-             list-style: lower-greek;
+
+    .d-left ul {
+        list-style: lower-greek;
     }
-    #list-button{
+
+    #list-button {
         border: solid 1px red;
         width: 1060px;
         height: 300px;
         background: white;
         box-shadow: 1px 1px 6px #a7a79b;
     }
+
     /*页脚开始*/
     .copyright {
         background-color: rgba(102, 102, 102, 0.17);
@@ -372,6 +394,7 @@
     .copyright ul li a {
         text-decoration: none;
     }
+
     .copyright p {
         text-align: center;
     }

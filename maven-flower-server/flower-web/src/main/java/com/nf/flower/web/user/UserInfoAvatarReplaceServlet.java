@@ -26,7 +26,6 @@ import java.util.UUID;
 public class UserInfoAvatarReplaceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Part part = req.getPart("avatar");
         String userId = req.getParameter("userId");
         // name
@@ -47,7 +46,6 @@ public class UserInfoAvatarReplaceServlet extends HttpServlet {
             resp.getWriter().println(JsonUtil.object2String(ResultVO.error(-1, "修改err")));
         } else {
             resp.getWriter().println(JsonUtil.object2String(ResultVO.success(null, "修改成功")));
-
         }
 
 

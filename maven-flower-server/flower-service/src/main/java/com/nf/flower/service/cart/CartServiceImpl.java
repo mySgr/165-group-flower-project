@@ -6,6 +6,7 @@ import com.nf.flower.entity.commodity.CartItem;
 import com.nf.flower.util.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,31 +69,36 @@ public class CartServiceImpl {
         }
     }
 
-    // 全部的
-    public int updateCartStatusAll(List<CartItem> list,int status) {
+    // 查询结算的购物项
+    public Cart getCartInfoByCartId(int[] ids) {
+        Cart cart = new Cart();
         try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
             ShopingMapper mapper = sqlSession.getMapper(ShopingMapper.class);
-            return mapper.updateCartStatusAll(list,status);
+
+            List<CartItem> cartItems = mapper.getCartInfoByCartId(ids);
+            BigDecimal price = new BigDecimal("0");
+            for (int i = 0; i < cartItems.size(); i++) {
+                price = price.add(cartItems.get(i).getCartPrice());
+            }
+            cart.setList(cartItems);
+            cart.setTotalPrice(price);
+
+            return cart;
+        }
+    }
+
+    // 全部的
+    public int updateCartStatusAll(List<CartItem> list, int status) {
+        try (SqlSession sqlSession = MyBatisUtils.getSqlSession()) {
+            ShopingMapper mapper = sqlSession.getMapper(ShopingMapper.class);
+            return mapper.updateCartStatusAll(list, status);
         }
     }
 
     public static void main(String[] args) {
-        CartItem cartItem = new CartItem();
-        cartItem.setCartStatus(1);
-        cartItem.setCartListId(1);
-
-        CartItem aaa = new CartItem();
-        aaa.setCartStatus(1);
-        aaa.setCartListId(2);
-
         final CartServiceImpl cartService = new CartServiceImpl();
-        ArrayList<CartItem> cartItems = new ArrayList<>();
 
-        cartItems.add(cartItem);
-        cartItems.add(aaa);
-        cartItems.forEach(cartItem1 -> {
-            System.out.println(cartItem1);
-        });
+
 
     }
 }

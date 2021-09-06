@@ -10,8 +10,8 @@
             <!--  导航栏菜单项  -->
             <el-menu-item index="/"><img width="90" src="../assets/image/logo.png"></el-menu-item>
             <el-menu-item index="/index">首页</el-menu-item>
-            <el-menu-item index="/class">分类</el-menu-item>
-            <el-menu-item index="/class">花语大全</el-menu-item>
+            <el-menu-item index="/flower-class">分类</el-menu-item>
+            <el-menu-item index="/flower-language">花语大全</el-menu-item>
 
             <el-menu-item index="/customer-service">帮助中心</el-menu-item>
 
@@ -26,7 +26,7 @@
                     <i class="el-icon-user"></i>
                     <span>个人中心</span>
                 </el-menu-item>
-                <el-menu-item index="2-2">
+                <el-menu-item index="/user/order-admin">
                     <i class="el-icon-s-order"></i>
                     <span>订单管理</span>
 
@@ -53,16 +53,19 @@
         <div id="body">
             <router-view></router-view>
         </div>
-        <my-footer></my-footer>
+
+
+
+
     </div>
 </template>
 
 
 <script>
-    import MyFooter from '../components/Footer'
+
 
     export default {
-        components: {MyFooter},
+
         data() {
             return {
                 flower: "",

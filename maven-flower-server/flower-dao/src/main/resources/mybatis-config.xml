@@ -41,5 +41,8 @@
         <mapper resource="dao/commodity/flower-picture-mapper.xml"/>
         <mapper resource="dao/commodity/flower-purpose-mapper.xml"/>
         <mapper resource="dao/commodity/flower-warehouse-mapper.xml"/>
+        <mapper resource="dao/order/orderinfo-mapper.xml"/>
+        <mapper resource="dao/order-address.xml"/>
+
     </mappers>
 </configuration>

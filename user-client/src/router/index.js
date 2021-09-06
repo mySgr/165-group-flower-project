@@ -13,7 +13,11 @@ import UserInfoFlowerSelect from "../components/user/UserInfoFlowerSelect"
 import UserInfoContact from "../components/user/UserInfoContact";
 import FlowerDetailed from "../components/flower/FlowerDetailed";
 import FlowerShopping from "../components/flower/FlowerShopping"
+import AddressAdmin from "../components/address/AddressAdmin"
 import ConfirmOrder from "../components/order/ConfirmOrder.vue"
+import OrderAdmin from "../components/order/OrderAdmin"
+import FlowerClass from "../components/class/FlowerClass"
+import FlowerLanguage from "../components/class/FlowerLanguage"
 
 Vue.use(VueRouter)
 
@@ -26,6 +30,8 @@ const routes = [
         component: Index,
         children: [
             {path: '/index', component: HomeContent},
+            {path: '/flower-class', component: FlowerClass},
+            {path: '/flower-language', component: FlowerLanguage},
 
             {
                 path: '/user',
@@ -33,6 +39,8 @@ const routes = [
                 children: [
                     {path: '/user/setting', component: UserInfoSetting},
                     {path: '/user/avatar', component: UserInfoAvatar},
+                    {path: '/user/address-admin', component: AddressAdmin},
+                    {path: '/user/order-admin', component: OrderAdmin}
                 ]
 
             },
@@ -43,7 +51,7 @@ const routes = [
             {path: '/detailed/:id', component: FlowerDetailed},
             {path: '/customer-service', component: UserInfoContact},
             {path: '/flower-shopping', component: FlowerShopping},
-            {path: '/checkout/:flowerId', component: ConfirmOrder}
+            {path: '/checkout/:ids', component: ConfirmOrder}
 
         ]
     }

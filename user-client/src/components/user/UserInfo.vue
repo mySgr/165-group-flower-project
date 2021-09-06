@@ -10,12 +10,19 @@
                             <i class="el-icon-user"></i>
                             <span>我的信息</span>
                         </el-menu-item>
-                        <el-menu-item index="2">
-                            <span>会员信息</span>
-                        </el-menu-item>
+<!--                        <el-menu-item index="2">-->
+<!--                            <span>会员信息</span>-->
+<!--                        </el-menu-item>-->
                         <el-menu-item index="/user/avatar">
                             <span>我的头像</span>
                         </el-menu-item>
+                        <el-menu-item index="/user/address-admin">
+                            <span>地址管理</span>
+                        </el-menu-item>
+                        <el-menu-item index="/user/order-admin">
+                            <span>订单管理</span>
+                        </el-menu-item>
+
                     </el-menu>
                 </el-aside>
 

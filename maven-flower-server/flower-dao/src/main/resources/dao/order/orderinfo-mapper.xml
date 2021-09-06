@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nf.flower.dao.OrderInfoMapper">
+    <insert id="addOrderMaster" useGeneratedKeys="true" keyProperty="orderMasterId">
+        insert into order_master (
+        payment_method, create_time, pay_time, order_status,
+        order_point, order_money,user_id, member_id,address_id)
+        values(#{paymentMethod},#{createTime},#{payTime},#{orderStatus},
+        #{orderPoint}, #{orderMoney},#{userId},#{memberId},#{addressId})
+    </insert>
+
+    <insert id="addOrderDetails">
+        insert into order_detail(order_master_id,product_count,product_price,flower_id)
+        values
+        <foreach collection="orders" item="order" separator=",">
+            (#{orderMasterId},#{order.productCount},#{order.productPrice},#{order.flowerId})
+        </foreach>
+    </insert>
+
+    <!--    查询订单相关  -->
+    <resultMap id="queryOrderInfoAndAddressMap" type="OrderMasterEntity" autoMapping="true">
+        <association property="userAddress" autoMapping="true">
+            <id property="addressId" column="address_id"></id>
+        </association>
+    </resultMap>
+    <!--    查询所有订单信息-->
+    <select id="queryOrderInfoAll" resultMap="queryOrderInfoAndAddressMap">
+        SELECT order_master_id,payment_method,create_time,pay_time,order_status, order_money,o.address_id,o.user_id ,
+        receiver,phone,address
+        FROM order_master O
+        LEFT JOIN user_address ON user_address.address_id=o.address_id
+        <where>
+            <if test="status!=0">
+                and order_status=#{status}
+            </if>
+        </where>
+    </select>
+    <!--    根据用户编号查询相应的订单 -->
+    <select id="queryOrderInfoByUserId" resultMap="queryOrderInfoAndAddressMap">
+        SELECT order_master_id,payment_method,create_time,pay_time,order_status, order_money,o.address_id,o.user_id ,
+        receiver,phone,address
+        FROM order_master O
+        LEFT JOIN user_address ON user_address.address_id=o.address_id
+        <where>
+            o.user_id=#{userId}
+        </where>
+    </select>
+
+    <resultMap id="queryOrderDetailAndFlowerMap" type="OrderDetailEntity" autoMapping="true">
+        <id property="orderDetailId" column="order_detail_id"></id>
+        <association property="flowerInfo" autoMapping="true">
+            <id property="flowerId" column="flower_id"></id>
+        </association>
+    </resultMap>
+    <select id="queryOrderDetailByOrderMasterId" resultMap="queryOrderDetailAndFlowerMap">
+        SELECT order_detail_id,order_master_id,product_count,product_price,
+        flower_info.flower_id,price,cover,title
+        FROM order_detail
+        LEFT JOIN flower_info ON order_detail.flower_id=flower_info.flower_id
+        <where>
+            order_master_id=#{id}
+        </where>
+
+    </select>
+    <!--    订单项 -->
+
+</mapper>

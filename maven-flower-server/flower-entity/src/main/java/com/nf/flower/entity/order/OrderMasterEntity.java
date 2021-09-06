@@ -6,6 +6,7 @@ import com.nf.flower.entity.UserMemberEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrderMasterEntity {
     private Integer orderMasterId;
@@ -19,7 +20,9 @@ public class OrderMasterEntity {
     private BigDecimal orderMoney;
     private Integer userId;
     private Integer memberId;
-    private  Integer addressId;
+    private Integer addressId;
+
+    private List<OrderDetailEntity> goods;
 
     private UserInfoEntity userInfo;
     private UserMemberEntity userMember;
@@ -94,6 +97,14 @@ public class OrderMasterEntity {
         return orderMoney;
     }
 
+    public List<OrderDetailEntity> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<OrderDetailEntity> goods) {
+        this.goods = goods;
+    }
+
     public void setOrderMoney(BigDecimal orderMoney) {
         this.orderMoney = orderMoney;
     }
@@ -161,6 +172,7 @@ public class OrderMasterEntity {
                 ", userId=" + userId +
                 ", memberId=" + memberId +
                 ", addressId=" + addressId +
+                ", goods=" + goods +
                 ", userInfo=" + userInfo +
                 ", userMember=" + userMember +
                 ", userAddress=" + userAddress +

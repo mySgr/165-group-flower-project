@@ -24,6 +24,7 @@ public class MyBatisUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(getSqlSession());
+
     }
+
 }

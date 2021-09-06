@@ -76,7 +76,7 @@
                             <i class="el-icon-s-order"></i>
                             <span>订单管理</span>
                         </template>
-                        <el-menu-item index="/home/order/list">
+                        <el-menu-item index="/order/list">
                             <span>订单列表</span>
                         </el-menu-item>
 

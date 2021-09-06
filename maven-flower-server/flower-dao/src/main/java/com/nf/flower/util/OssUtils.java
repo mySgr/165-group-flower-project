@@ -49,7 +49,4 @@ public class OssUtils {
         return putObjectResult;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getOSSClient());
-    }
 }

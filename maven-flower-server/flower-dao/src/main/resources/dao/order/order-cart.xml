@@ -22,11 +22,31 @@
             user_info.user_id = #{userId}
         </where>
     </select>
+
+    <resultMap id="cartItemAndFlowerMap" type="cartItem" autoMapping="true">
+        <id property="cartListId" column="cart_list_id"></id>
+        <association property="flower" autoMapping="true">
+            <id column="flower_id" property="flowerId"></id>
+        </association>
+
+    </resultMap>
+    <!--查询购物信息-->
+    <select id="getCartInfoByCartId" resultMap="cartItemAndFlowerMap">
+        select cart_list_id,c.flower_id,cart_count,cart_price,cover,title,price from cart_list C
+        left join flower_info F on c.flower_id = f.flower_id
+        where cart_list_id in(
+        <foreach collection="ids" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </select>
+
     <!--    添加到购物车-->
     <insert id="addShopping">
         INSERT INTO order_cart(user_id,flower_id,product_amount,price)
         VALUES(#{userId},#{flowerID},#{productAmount},#{price})CartItem
     </insert>
+
     <delete id="deleteFlower">
         DELETE FROM cart_list WHERE cart_list_id=#{cartId};
     </delete>
@@ -92,14 +112,12 @@
     &allowMultiQueries=true 这个才可以执行。
     -->
     <update id="updateCartStatusAll">
-
-
-                UPDATE cart_list SET cart_status = #{status}
-                WHERE cart_list_id IN(
-                <foreach collection="list" item="i" separator=",">
-                    ${i.cartListId}
-                </foreach>
-                )
+        UPDATE cart_list SET cart_status = #{status}
+        WHERE cart_list_id IN(
+        <foreach collection="list" item="i" separator=",">
+            ${i.cartListId}
+        </foreach>
+        )
     </update>
 </mapper>
 

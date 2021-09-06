@@ -69,4 +69,17 @@ public class OrderDetailEntity {
     public void setFlowerInfo(FlowerinfoEntity flowerInfo) {
         this.flowerInfo = flowerInfo;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDetailEntity{" +
+                "orderDetailId=" + orderDetailId +
+                ", orderMasterId=" + orderMasterId +
+                ", productCount=" + productCount +
+                ", productPrice=" + productPrice +
+                ", flowerId=" + flowerId +
+                ", orderMaster=" + orderMaster +
+                ", flowerInfo=" + flowerInfo +
+                '}';
+    }
 }

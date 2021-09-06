@@ -14,6 +14,9 @@ public interface ShopingMapper {
 
     List<FLowerInfoSelectShoppingEntity> selectShopping(@Param("userId") int userId);
 
+
+    List<CartItem> getCartInfoByCartId(@Param("ids") int[] ids);
+
     void addShopping(@Param("userId") int userId,
                      @Param("flowerID") int flowerID,
                      @Param("productAmount") int productAmount,

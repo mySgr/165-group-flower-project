@@ -1,6 +1,5 @@
 package com.nf.flower.vo;
 
-import com.google.gson.Gson;
 
 public class ResultVO {
     // 响应编码 :200 表示正常，-1 表示用户没有登陆....
@@ -13,9 +12,6 @@ public class ResultVO {
     private ResultVO() {
     }
 
-    public String toJSON() {
-        return new Gson().toJson(this);
-    }
 
     public static ResultVO success(Object data, String message) {
         ResultVO resultVO = new ResultVO();

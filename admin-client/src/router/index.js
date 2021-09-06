@@ -6,6 +6,8 @@ import Home from '../components/Home.vue'
 import AddFlower from '../components/commodity/AddFlower'
 import EditFlower from '../components/commodity/EtidFlower'
 import FlowerInfoList from '../components/commodity/FlowerInfoList'
+import OrderList from "../components/order/OrderList";
+
 
 Vue.use(VueRouter)
 
@@ -16,7 +18,8 @@ const routes = [
         children: [
             {path: '/addflower', component: AddFlower},
             {path: '/flower/list', component: FlowerInfoList},
-            {path: '/flower/edit/:flowerId', component: EditFlower}
+            {path: '/flower/edit/:flowerId', component: EditFlower},
+            {path: '/order/list',component: OrderList}
 
         ]
     },

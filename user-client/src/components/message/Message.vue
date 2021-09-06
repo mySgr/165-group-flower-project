@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h5>message</h5>
+        <h5>暂无消息</h5>
     </div>
 </template>

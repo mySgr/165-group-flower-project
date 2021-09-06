@@ -43,8 +43,14 @@
                     }
                 });
             },
-
-
+        }, created() {
+            this.$axios({
+                url: '/api/cart/list?userId=10001',
+                method: 'post',
+                 data: {xx: 11}
+            }).then(r => {
+                console.log(r)
+            })
         }
     }
 

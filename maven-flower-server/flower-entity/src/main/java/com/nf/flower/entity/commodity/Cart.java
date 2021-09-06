@@ -55,15 +55,15 @@ public class Cart {
 
 
 	/**
-	 * ÖØ¹¹getPrice·½·¨
+	 * é‡æ„getPriceæ–¹æ³•
 	 * 
 	 * @return
 	 */
 //	public float getFlowerPrice() {
 //
-//		// ¹ºÎï³µ×Ü¼Û¸ñ
+//		// è´­ç‰©è½¦æ€»ä»·æ ¼
 //		float totalprice = 0;
-//		// µü´ú¹ºÎï³µÖĞËùÓĞ¹ºÎïÏî, Ïà¼Ó»ñÈ¡¹ºÎï³µ×Ü¼Û
+//		// è¿­ä»£è´­ç‰©è½¦ä¸­æ‰€æœ‰è´­ç‰©é¡¹, ç›¸åŠ è·å–è´­ç‰©è½¦æ€»ä»·
 //		for (Map.Entry<String, CartItem> me : map.entrySet()) {
 //			CartItem item = me.getValue();
 //			totalprice += item.getFlowerPrice();

@@ -7,7 +7,7 @@
             <el-input type="textarea" v-model="user.autograph"></el-input>
 
         </el-form-item>
-        <el-form-item label="xx">
+        <el-form-item label="我的生日">
             <el-date-picker
                     v-model="user.birthdate"
                     type="date"

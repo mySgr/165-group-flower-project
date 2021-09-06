@@ -94,44 +94,14 @@ CREATE TABLE flower_info(
   warehouse_id INT COMMENT'仓库编号',
   PRIMARY KEY(flower_id)
   )	
-  	
-DELETE FROM flower_info WHERE flower_id=9;
  
-SELECT * FROM flower_info
-DELETE FROM flower_info
-
 /**鲜花图片**/
 CREATE TABLE flower_picture(
   picture_id INT PRIMARY KEY AUTO_INCREMENT,    #鲜花图片编号
   flower_id INT,                    		#鲜花编号
   img_url VARCHAR(128)         			#图片路径
 );
-SELECT * FROM FLOWER_picture
 
-DROP TABLE flower_picture
-DROP TABLE user_member
-
-CREATE TABLE order_cart(
-  cart_id INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '购物车ID',
-  user_id INT UNSIGNED NOT NULL COMMENT '用户ID',
-  flower_id INT UNSIGNED NOT NULL COMMENT '商品ID',
-  product_amount INT NOT NULL COMMENT '加入购物车商品数量',
-  price DECIMAL(8,2) NOT NULL COMMENT '商品价格',
-  add_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入购物车时间',
-  PRIMARY KEY(cart_id)
-) ENGINE = INNODB COMMENT '购物车表';
-
-DELETE FROM order_cart WHERE cart_id=8;
-
- INSERT INTO order_cart(user_id,flower_id,product_amount,price) VALUES(10001,11,2,100)
-SELECT * FROM  order_cart
-
-INSERT INTO order_cart(user_id,flower_id,product_amount,price) VALUES(10001,1,1,100)
-
-SELECT  title ,cover,order_cart.product_amount,order_cart.price,user_name FROM order_cart
- LEFT JOIN  user_info ON  user_info.user_id = order_cart.user_id 
- LEFT JOIN flower_info C ON  c.flower_id = order_cart.cart_id
- WHERE user_info.user_id = 10001
 
 
 -- 订单主表
@@ -164,7 +134,7 @@ CREATE TABLE order_detail
   flower_id INT NOT NULL COMMENT '鲜花编号',
 
   PRIMARY KEY(order_detail_id)
-)
+);
 
 /**收货地址信息**/
 
@@ -181,8 +151,7 @@ CREATE TABLE cart_master
 (
 cart_master_id INT AUTO_INCREMENT  PRIMARY KEY COMMENT'购物车主表编号 ',
 user_id INT COMMENT'用户编号'
-)
-
+);
 
 CREATE TABLE cart_list
 (
@@ -193,6 +162,14 @@ CREATE TABLE cart_list
  cart_price DECIMAL(10,2) COMMENT '购物车小计',
  cart_status INT NOT NULL DEFAULT 1 COMMENT '当前状态，1 表示复选框选中，0表示未选中'
 )
+
+
+
+
+
+
+
+
 
 CREATE TABLE user_address(
   address_id INT PRIMARY KEY AUTO_INCREMENT,

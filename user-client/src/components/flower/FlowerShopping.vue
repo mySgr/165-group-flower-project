@@ -1,15 +1,14 @@
 <template>
-
-    <div class="zhuti">
+    <div class="zhuti" v-if="cart.list.length!=0">
         <div class="zi">
             <input id="quanxuan" @change="checkAllCartItemChange" v-model="checked" type="checkbox"/>
             全选
-                <span class="yang">样品图</span>
-                <span class="shangpingname">商品名称</span>
-                <span class="price">价格</span>
-                <span class="count">数量</span>
-                <span class="xj">小计</span>
-                <span class="caozuo">操作</span>
+            <span class="yang">样品图</span>
+            <span class="shangpingname">商品名称</span>
+            <span class="price">价格</span>
+            <span class="count">数量</span>
+            <span class="xj">小计</span>
+            <span class="caozuo">操作</span>
         </div>
 
         <div class="blkuai" v-for="(item,index) in cart.list" :key="index">
@@ -32,10 +31,14 @@
             </div>
         </div>
 
-        <el-button type="primary" round class="jiesuan" @click="jieSuan">结算</el-button>
-        <span class="zongji">总计:{{cart.totalPrice==null?0:cart.totalPrice}}</span>
+
+            <el-button type="primary" round class="jiesuan" @click="jieSuan">结算</el-button>
+            <span class="zongji">总计:{{cart.totalPrice==null?0:cart.totalPrice}}</span>
+
+
 
     </div>
+    <div v-else><h3>你的购物车是空的，去逛逛吧</h3></div>
 
 </template>
 
@@ -46,15 +49,28 @@
                 checked: false,
                 total: 0,
                 user: {},
-                shopping: [],
                 num: 1,
                 cart: {}
 
             }
         },
         methods: {
-            jieSuan(){
-              alert("购买成功")
+            jieSuan() {
+                const goods= this.cart.list.filter(v=>v.cartStatus===1)
+                if (goods.length==0){
+                    alert("请选择商品")
+                    return
+                }
+                let ids=''
+                goods.forEach((v,i)=>{
+                    if (i==goods.length-1){
+                        ids+=v.cartListId
+                    }else {
+                        ids+=v.cartListId+','
+                    }
+                })
+                this.$router.push("/checkout/"+ids)
+
             },
             // 全选
             checkAllCartItemChange() {
@@ -62,7 +78,7 @@
                 let status = this.checked ? 1 : 0
                 this.$axios({
                     url: '/api/cart/status/all',
-                    params: {status:status, userId:this.user.userId}
+                    params: {status: status, userId: this.user.userId}
                 }).then(r => {
                     this.queryCart()
                     console.log(r)
@@ -151,27 +167,33 @@
 
 
     }
-    #quanxuan{
+
+    #quanxuan {
         width: 20px;
         height: 20px;
         margin-left: 25px;
     }
-    .yang{
+
+    .yang {
         margin-left: 80px;
     }
 
-    .shangpingname{
+    .shangpingname {
         margin-left: 50px;
     }
-    .price{
+
+    .price {
         margin-left: 25px;
     }
-    .count{
+
+    .count {
         margin-left: 40px;
     }
-    .xj{
+
+    .xj {
         margin-left: 22px;
     }
+
     .caozuo {
         margin-left: 60px;
     }
@@ -262,7 +284,8 @@
         margin-left: 620px;
         margin-top: 10px;
     }
-    .jiesuan{
+
+    .jiesuan {
         position: absolute;
         margin-left: 700px;
     }
